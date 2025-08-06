@@ -1,9 +1,9 @@
-import { RawEntry, Is } from './types.js'
+import type { RawEntry } from './types.js' // eslint-disable-line
 const rawList: RawEntry[] = [
 	{
 		name: 'ABlog',
 		github: 'abakan-zz/ablog',
-		website: 'https://ablog.readthedocs.io/',
+		website: 'https://ablog.readthedocs.io/en/stable/',
 		description:
 			'ABlog is a Sphinx extension that converts any documentation or personal website project into a full-fledged blog.',
 	},
@@ -14,14 +14,13 @@ const rawList: RawEntry[] = [
 	{
 		name: 'acrylamid',
 		github: 'posativ/acrylamid',
-		website: 'https://posativ.org/acrylamid/',
 		license: 'BSD-2-Clause',
 		defunct: true,
 	},
 	{
 		name: 'Adduce',
 		github: 'DeclanChidlow/Adduce',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'AkashaCMS',
@@ -37,7 +36,8 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'Appernetic',
-		website: 'https://appernetic.io/',
+		website: 'https://github.com/appernetic',
+		defunct: true,
 		license: false,
 		language: 'Web',
 		description:
@@ -60,7 +60,8 @@ const rawList: RawEntry[] = [
 		github: 'capjamesg/aurora',
 		language: 'Python',
 		license: 'MIT',
-		description: 'A fast, extensible static site generator implemented in Python.',
+		description:
+			'A fast, extensible static site generator implemented in Python.',
 	},
 	{
 		name: 'Automad',
@@ -77,7 +78,7 @@ const rawList: RawEntry[] = [
 	{
 		created_at: '2021-02-20',
 		defunct: true,
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		language: 'JavaScript',
 		license: 'Unlicense',
 		name: 'Axiom',
@@ -114,7 +115,7 @@ const rawList: RawEntry[] = [
 		website: 'https://basildon.netlify.app/',
 		description:
 			'A simple generator written in PHP, built around Markdown with Yaml frontmatter that is read into a SQLite database and queried in Twig templates.',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		language: 'PHP',
 	},
 	{
@@ -131,10 +132,11 @@ const rawList: RawEntry[] = [
 		license: 'WTFPL',
 	},
 	{
-		name: 'Bitbucket Pages',
-		website: 'https://pages.bitbucket.io',
+		name: 'Bitbucket Cloud',
+		website:
+			'https://support.atlassian.com/bitbucket-cloud/docs/publishing-a-website-on-bitbucket-cloud/',
 		description: 'Host your static websites on Bitbucket.com for free.',
-		is: Is.SSHost,
+		is: 'static site host',
 	},
 	{
 		name: 'Blacksmith',
@@ -146,7 +148,7 @@ const rawList: RawEntry[] = [
 		description: 'Blog-aware, static site generator',
 		license: 'MIT',
 		language: 'Python',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'Blatter',
@@ -155,11 +157,11 @@ const rawList: RawEntry[] = [
 		language: 'Python',
 		description:
 			'Blatter is a tiny tool for creating and publishing static web sites built from dynamic templates.',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'BlazeBlogger',
-		website: 'http://blaze.blackened.cz/',
+		website: 'http://blaze.blackened.cz',
 		license: 'GPL-3.0',
 		language: 'Perl',
 	},
@@ -169,7 +171,7 @@ const rawList: RawEntry[] = [
 		license: 'BSD-2-Clause',
 		language: 'Perl',
 		description: 'static html page generation in perl',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'Blode',
@@ -187,7 +189,7 @@ const rawList: RawEntry[] = [
 		license: 'WTFPL',
 		language: 'C++',
 		description: 'Just another static blog generator, written in C++17.',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: false,
 	},
 	{
@@ -201,7 +203,7 @@ const rawList: RawEntry[] = [
 		license: 'MIT',
 		language: 'Javascript',
 		description: 'Static blog generator built on top of Nuxt and Vue.',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'blogit',
@@ -212,17 +214,17 @@ const rawList: RawEntry[] = [
 		name: 'Blogofile',
 		github: 'EnigmaCurry/blogofile',
 		license: 'MIT',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'blogpy',
 		github: 'travisred/blogpy',
 		language: 'Python',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'blosxom',
-		website: 'http://blosxom.sourceforge.net/',
+		website: 'https://blosxom.sourceforge.net',
 		license: 'MIT',
 		language: 'Perl',
 		description:
@@ -235,7 +237,7 @@ const rawList: RawEntry[] = [
 		github: 'jeffknupp/blug',
 		license: 'MIT',
 		language: 'Python',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		defunct: true,
 	},
 	{
@@ -253,7 +255,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Bricolage CMS',
 		github: 'bricoleurs/bricolage',
-		website: 'http://bricolagecms.org/',
 		license: '(BSD-3-Clause AND LGPL-2.1 AND CC-BY-SA-2.5)',
 	},
 	{
@@ -264,7 +265,7 @@ const rawList: RawEntry[] = [
 		name: 'Broccoli Taco',
 		github: 'moudy/broccoli-taco',
 		license: 'MIT',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'brochure',
@@ -281,7 +282,7 @@ const rawList: RawEntry[] = [
 		github: 'bunto/bunto',
 		description:
 			'A modern web application framework and static site generator based on Jekyll.',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'buster',
@@ -290,7 +291,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Cabin',
 		github: 'CabinJS/Cabin',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'Cactus',
@@ -301,7 +302,7 @@ const rawList: RawEntry[] = [
 		github: 'caixw/blogit',
 		license: 'MIT',
 		language: 'Go',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'Calepin',
@@ -327,7 +328,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Cecil',
 		github: 'Cecilapp/Cecil',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'Chili',
@@ -356,20 +357,22 @@ const rawList: RawEntry[] = [
 	{
 		name: 'cl-yag',
 		language: 'Common LISP',
-		website: 'https://dataswamp.org/~solene/2017-12-16-announcement-cl-yag.html',
-		description: 'Publish a website and/or a gopher hole from a list of articles. Supports different markup language per article'
+		website:
+			'https://dataswamp.org/~solene/2017-12-16-announcement-cl-yag.html',
+		description:
+			'Publish a website and/or a gopher hole from a list of articles. Supports different markup language per article',
 	},
 	{
 		name: 'Cloud Cannon',
 		website: 'https://cloudcannon.com/',
 		description:
 			'The Cloud CMS for Jekyll. Build static or Jekyll websites, have your team and clients update inline with the CloudCannon GUI.',
-		is: Is.SSHost,
+		is: 'static site host',
 	},
 	{
 		name: 'CMintS',
 		github: 'cmints/cmints',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'cobalt.rs',
@@ -385,13 +388,13 @@ const rawList: RawEntry[] = [
 		github: 'fiatjaf/coisas',
 		description:
 			'Pure client-side CMS-like file editor and media manager for stuff hosted on GitHub.',
-		is: Is.SSEditor,
+		is: 'static site editor',
 		extensible: true,
 	},
 	{
 		name: 'coleslaw',
 		github: 'coleslaw-org/coleslaw',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: true,
 	},
 	{
@@ -403,7 +406,7 @@ const rawList: RawEntry[] = [
 		website: 'https://www.contentful.com',
 		description:
 			'Contentful is a content management developer platform with an API at its core.',
-		is: Is.SSEditor,
+		is: 'static site editor',
 	},
 	{
 		name: 'Cory',
@@ -423,16 +426,16 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Curvenote',
 		description: 'Generate websites from Markdown and Jupyter Notebooks',
-		github: 'https://github.com/curvenote/curvenote',
-		website: 'https://curvenote.com/docs/web',
+		github: 'curvenote/curvenote',
+		website: 'https://curvenote.com/demos/publish-from-github',
 		license: 'MIT',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'cyrax',
 		github: 'piranha/cyrax',
 		website: 'https://pypi.org/project/cyrax/',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'cytoplasm',
@@ -475,13 +478,14 @@ const rawList: RawEntry[] = [
 		github: 'rra/docknot',
 		website: 'https://www.eyrie.org/~eagle/software/docknot/',
 		language: 'Perl',
-		description: 'Static web site generator with special support for managing software releases. It can generate distribution tarballs and software package documentation from a YAML metadata file and templates. The goal is to generate both web pages and distributed documentation files from the same source, using templates for consistency across multiple packages',
+		description:
+			'Static web site generator with special support for managing software releases. It can generate distribution tarballs and software package documentation from a YAML metadata file and templates. The goal is to generate both web pages and distributed documentation files from the same source, using templates for consistency across multiple packages',
 	},
 	{
 		name: 'DocPad',
 		github: 'docpad/docpad',
 		license: 'MIT',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: true,
 	},
 	{
@@ -494,12 +498,11 @@ const rawList: RawEntry[] = [
 		license: 'MIT',
 		description:
 			'Docusaurus makes it easy to build and maintain Open Source documentation websites.',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'Drapache',
 		github: 'louissobel/Drapache',
-		website: 'https://github.com/louissobel/Drapache',
 	},
 	{
 		name: 'drfrederson',
@@ -527,7 +530,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'DSSG',
 		github: 'kambrium/dssg',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'DSW',
@@ -536,7 +539,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'dwttool',
 		github: 'kambrium/dwttool',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'dynamicmatic',
@@ -549,7 +552,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'ecstatic',
 		github: 'samrat/ecstatic',
-		website: 'https://github.com/samrat/ecstatic',
 		license: 'EPL-1.0',
 	},
 	{
@@ -559,17 +561,11 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Eleventy',
 		github: '11ty/eleventy',
-		is: Is.SSGenerator,
-	},
-	{
-		name: 'Elyse',
-		github: 'FSX/elyse',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'embellih',
 		github: 'boscoh/embellish',
-		website: 'http://boscoh.github.io/embellish/',
 	},
 	{
 		name: 'enfield',
@@ -601,13 +597,6 @@ const rawList: RawEntry[] = [
 		language: 'Fortran',
 	},
 	{
-		name: 'Firedrop2',
-		website: 'http://www.voidspace.org.uk/python/firedrop2/',
-		license: 'BSD-3-Clause',
-		language: 'Python',
-		description: 'The Blog Tool for Discerning Pythoneers',
-	},
-	{
 		name: 'Firmant',
 		website: 'https://pypi.org/project/Firmant/0.2.2/',
 		license: 'BSD-3-Clause',
@@ -615,8 +604,8 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'fjord',
-		github: 'dkuntz2/fjord',
-		website: 'https://github.com/dkuntz2/fjord',
+		github: 'sleepdeprecation/fjord',
+		defunct: true,
 	},
 	{
 		name: 'Flamel',
@@ -629,7 +618,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'flim',
 		github: 'shapeshed/flim',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'Floyd',
@@ -638,7 +627,7 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'FMPP',
-		website: 'http://fmpp.sourceforge.net/',
+		website: 'https://fmpp.sourceforge.net',
 		license: 'Apache-2.0',
 		language: 'Java',
 		description: 'FreeMarker-based text file PreProcessor',
@@ -649,7 +638,7 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'Frank',
-		github: 'blahed/frank',
+		github: 'trvsdnn/frank',
 	},
 	{
 		name: 'Franklin',
@@ -661,7 +650,7 @@ const rawList: RawEntry[] = [
 		name: 'Frog',
 		github: 'greghendershott/frog',
 		license: 'MIT',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: false,
 	},
 	{
@@ -680,7 +669,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Gatsby',
 		github: 'gatsbyjs/gatsby',
-		website: 'https://www.gatsbyjs.org/',
+		website: 'https://www.gatsbyjs.com',
 	},
 	{
 		name: 'Gen',
@@ -689,10 +678,9 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Generic Static Site Generator',
 		github: 'theabbie/Generic-Static-Site-Generator',
-		website: 'https://github.com/theabbie/Generic-Static-Site-Generator',
 		license: 'MIT',
 		language: 'JavaScript',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		description: 'A Generic Static Site Generator',
 	},
 	{
@@ -704,7 +692,7 @@ const rawList: RawEntry[] = [
 		github: 'paulohrpinheiro/gerablog',
 		description:
 			'Gerablog is a static blog generator. Write your posts in in *Markdown*, publish in *HTML*. Just two commands (create and generate) and seven templates (header, footer, categories page, categories block, main index, post and feed).',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'gettheshitdone',
@@ -719,14 +707,14 @@ const rawList: RawEntry[] = [
 		website: 'https://pages.github.com',
 		description:
 			'Websites for you and your projects, hosted directly from your GitHub repository. Just edit, push, and your changes are live.',
-		is: Is.SSHost,
+		is: 'static site host',
 	},
 	{
 		name: 'GitLab Pages',
 		website: 'https://pages.gitlab.io',
 		description:
 			'Host your static websites on GitLab.com for free, or on your own GitLab Enterprise Edition instance.',
-		is: Is.SSHost,
+		is: 'static site host',
 	},
 	{
 		name: 'Glyph',
@@ -736,18 +724,14 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Glyph',
 		github: 'dbriemann/glyph',
-		website: 'https://dbriemann.github.io/blog/2-introducing-glyph-static-site-generator-powered-by-github-issues-and-pages.html',
+		website:
+			'https://dbriemann.github.io/blog/2-introducing-glyph-static-site-generator-powered-by-github-issues-and-pages.html',
 		description: 'A static site generator utilizing Github issues and pages.',
 		license: 'MIT',
 	},
 	{
 		name: 'Go-Static!',
 		github: 'colynb/generator-go-static',
-	},
-	{
-		name: 'goblog',
-		github: 'icub3d/goblog',
-		license: 'MIT',
 	},
 	{
 		name: 'Goldbarg',
@@ -770,21 +754,21 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Grain',
 		github: 'sysgears/grain',
-		website: 'https://sysgears.com/work/grain/',
+		website: 'https://sysgears.com/work/grain-framework/',
 		license: '(Apache-2.0 AND MIT)',
 	},
 	{
 		name: 'Grav',
 		github: 'getgrav/grav',
 		website: 'https://getgrav.org/',
-		is: Is.FlatFileCMS,
+		is: 'flat file cms',
 		extensible: true,
 	},
 	{
 		name: 'Grav Administration Panel',
 		github: 'getgrav/grav-plugin-admin',
 		website: 'https://learn.getgrav.org/15/admin-panel/introduction',
-		is: Is.SSEditor,
+		is: 'static site editor',
 	},
 	{
 		name: 'Graze',
@@ -834,7 +818,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Gustav',
 		github: 'futape/gustav',
-		website: 'https://github.com/futape/gustav',
 		license: 'BSD-3-Clause',
 	},
 	{
@@ -850,7 +833,7 @@ const rawList: RawEntry[] = [
 		name: 'Hakyll',
 		github: 'jaspervdj/hakyll',
 		website: 'https://jaspervdj.be/hakyll/',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'Halwa',
@@ -862,7 +845,7 @@ const rawList: RawEntry[] = [
 		license: false,
 		description:
 			"Super-charge your web development with Hammer. Still using PHP includes for HTML? You're going to love hammer.",
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'hanayo',
@@ -896,7 +879,7 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'HaroldJS',
-		github: 'juliancwirko/create-harold-app',
+		github: 'harold-js/create-harold-app',
 		website: 'https://www.haroldjs.com',
 		license: 'MIT',
 	},
@@ -917,7 +900,7 @@ const rawList: RawEntry[] = [
 		language: 'Scheme',
 		description:
 			'A simple, functional, hackable static site generator that gives authors the ability to treat websites as Scheme programs.',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: true,
 	},
 	{
@@ -933,13 +916,13 @@ const rawList: RawEntry[] = [
 		name: 'Hepek',
 		github: 'sake92/hepek',
 		description: 'Content generators in Scala. Intuitive, scalable, powerful.',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'Hexo',
 		github: 'hexojs/hexo',
 		website: 'https://hexo.io/',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'HiD',
@@ -953,29 +936,22 @@ const rawList: RawEntry[] = [
 		website: 'http://thoughtbot.github.io/high_voltage/',
 	},
 	{
-		name: 'Hobix',
-		github: 'hobix/hobix',
-		website: 'https://hobix.github.io/hobix/',
-	},
-	{
 		name: 'HSC',
 		github: 'mbethke/hsc',
 		created_at: '1998-09-21',
 	},
 	{
 		name: 'htmd',
-		website: 'https://github.com/Siecje/htmd',
 		github: 'Siecje/htmd',
 		language: 'Python',
 		license: 'MIT',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		created_at: '2015-01-31',
 		updated_at: '2022-03-16',
 	},
 	{
 		name: 'hublo',
 		github: 'pyr/hublo',
-		website: 'http://spootnik.org/',
 	},
 	{
 		name: 'HubPress',
@@ -984,7 +960,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Hugo',
 		github: 'gohugoio/hugo',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: true,
 	},
 	{
@@ -994,9 +970,9 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'Hyde (CHICKEN)',
-		license: 'BSD',
+		license: 'BSD-3-Clause',
 		description: 'Schemey clone of programs such as Webby and Jekyll',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: true,
 		website: 'http://wiki.call-cc.org/eggref/5/hyde',
 		language: 'Scheme',
@@ -1011,7 +987,7 @@ const rawList: RawEntry[] = [
 		license: 'Apache-2.0',
 		description:
 			'Lightweight and turnkey static site/blog generator for developers',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'igor',
@@ -1022,7 +998,8 @@ const rawList: RawEntry[] = [
 		website: 'http://ikiwiki.info/',
 		license: 'GPL-2.0',
 		language: 'Perl',
-		description: 'Ikiwiki is a wiki compiler. It converts wiki pages into HTML pages suitable for publishing on a website.',
+		description:
+			'Ikiwiki is a wiki compiler. It converts wiki pages into HTML pages suitable for publishing on a website.',
 		created_at: '2006-03-10',
 		updated_at: '2022-05-30',
 	},
@@ -1061,17 +1038,17 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Jekyll',
 		github: 'jekyll/jekyll',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'Jekyll Admin',
 		github: 'jekyll/jekyll-admin',
-		is: Is.SSEditor,
+		is: 'static site editor',
 	},
 	{
 		name: 'Jekyll Now',
 		github: 'barryclark/jekyll-now',
-		website: 'http://www.jekyllnow.com',
+		website: 'https://www.jekyllnow.com',
 	},
 	{
 		name: 'Jekytrum',
@@ -1089,7 +1066,7 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'jigsaw',
-		github: 'tightenco/jigsaw',
+		github: 'tighten/jigsaw',
 		website: 'https://jigsaw.tighten.co',
 	},
 	{
@@ -1112,7 +1089,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Jr',
 		github: 'xeoncross/jr',
-		website: 'http://xeoncross.github.io/jr/',
+		website: 'https://xeoncross.github.io/jr/',
 		license: 'MIT',
 	},
 	{
@@ -1155,7 +1132,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Kulfon',
 		github: 'kulfonjs/kulfon',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'Lambda Pad',
@@ -1172,13 +1149,9 @@ const rawList: RawEntry[] = [
 		website: 'https://lanyon.readthedocs.io/en/latest/',
 	},
 	{
-		name: 'larassg',
-		github: 'andygwood/larassg',
-	},
-	{
 		name: 'Latemp',
 		bitbucket: 'shlomif/latemp',
-		website: 'http://web-cpan.shlomifish.org/latemp/',
+		website: 'https://web-cpan.shlomifish.org/latemp/',
 		language: 'Perl',
 	},
 	{
@@ -1188,7 +1161,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Laze',
 		github: 'avdgaag/laze',
-		website: 'http://avdgaag.github.io/laze/',
+		website: 'https://avdgaag.github.io/laze/',
 	},
 	{
 		name: 'lazyblorg',
@@ -1202,7 +1175,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Lektor',
 		github: 'lektor/lektor',
-		is: Is.FlatFileCMS,
+		is: 'flat file cms',
 		extensible: true,
 	},
 	{
@@ -1211,7 +1184,7 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'Leo',
-		website: 'http://leohtml.sourceforge.net/',
+		website: 'https://leohtml.sourceforge.net',
 		license: 'GPL-2.0',
 		language: 'C++',
 	},
@@ -1226,7 +1199,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Liara',
 		github: 'anteru/liara',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: true,
 	},
 	{
@@ -1245,7 +1218,7 @@ const rawList: RawEntry[] = [
 		description:
 			'Logya is a static website generator written in Python designed to be easy to use and flexible.',
 		created_at: '2011-08-21T00:00:00Z',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'Luapress',
@@ -1254,11 +1227,11 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Lume',
 		github: 'lumeland/lume',
-		website: 'http://lume.land',
+		website: 'https://lume.land',
 		description: 'Fast and flexible static site generator for Deno.',
 		created_at: '2020-09-07T19:24:00Z',
 		license: 'MIT',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'Machined',
@@ -1270,16 +1243,7 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'Magneto',
-		github: 'donmelton/magneto',
-	},
-	{
-		name: 'makebakery',
-		github: 'datagrok/makebakery',
-		website: 'http://datagrok.github.io/makebakery/',
-		license: 'AGPL-3.0+ WITH Autoconf-exception-3.0',
-		description: 'A static website generator built on GNU Make',
-		is: Is.SSGenerator,
-		extensible: true,
+		github: 'lisamelton/magneto',
 	},
 	{
 		name: 'makeblog',
@@ -1293,12 +1257,12 @@ const rawList: RawEntry[] = [
 	{
 		name: 'makesite.py',
 		github: 'sunainapai/makesite',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: true,
 	},
 	{
 		name: 'Markbox',
-		github: 'myfreeweb/markbox',
+		github: 'valpackett/markbox',
 	},
 	{
 		name: 'Markdoc',
@@ -1319,7 +1283,7 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'Maven Site Plugin',
-		website: 'http://maven.apache.org/plugins-archives/maven-site-plugin-3.3/',
+		website: 'https://maven.apache.org/plugins-archives/maven-site-plugin-3.3/',
 		license: 'Apache-2.0',
 		language: 'Java',
 		description:
@@ -1328,7 +1292,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'mdwiki',
 		github: 'Dynalon/mdwiki',
-		website: 'http://dynalon.github.io/mdwiki/',
 		license: 'AGPL-3.0',
 	},
 	{
@@ -1341,7 +1304,7 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'metalsmith',
-		github: 'segmentio/metalsmith',
+		github: 'metalsmith/metalsmith',
 		license: 'MIT',
 	},
 	{
@@ -1363,17 +1326,16 @@ const rawList: RawEntry[] = [
 	{
 		name: 'MinoriWiki',
 		github: 'phoenixlzx/MinoriWiki',
-		website: 'http://phoenixlzx.github.io/MinoriWiki/',
+		website: 'https://phoenixlzx.github.io/MinoriWiki/',
 	},
 	{
 		name: 'Misakai Baker',
 		github: 'Kelindar/misakai-baker',
-		website: 'http://baker.misakai.com',
 	},
 	{
 		name: 'misaki',
 		github: 'liquidz/misaki',
-		website: 'http://liquidz.github.io/misaki/',
+		website: 'https://liquidz.github.io/misaki/',
 	},
 	{
 		name: 'MkDocs',
@@ -1382,12 +1344,10 @@ const rawList: RawEntry[] = [
 	{
 		name: 'mksite',
 		github: 'clehner/mksite',
-		website: 'http://celehner.com/mksite/',
 	},
 	{
 		name: 'mkws',
-		github: 'mkws-1/mkws',
-		website: 'http://mkws.sh/',
+		website: 'https://mkws.sh',
 		description:
 			'A simple static site generator using sh as a template language',
 	},
@@ -1401,24 +1361,24 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'Muleify',
-		github: 'vokeio/muleify',
+		github: 'xeaone/muleify',
 		description:
 			'A zero configuration static site generator and asset preprocessor compiler.',
 	},
 	{
 		name: 'mynt',
-		github: 'Anomareh/mynt',
+		github: 'uhnomoli/mynt',
 	},
 	{
 		name: 'NanoBlogger',
-		website: 'http://nanoblogger.sourceforge.net/',
+		website: 'https://nanoblogger.sourceforge.net',
 		license: 'GPL-3.0',
 		language: 'Shell',
 	},
 	{
 		name: 'Nanoc',
 		github: 'nanoc/nanoc',
-		website: 'https://nanoc.ws/',
+		website: 'https://nanoc.app',
 		created_at: '2007-05-03T00:00:00Z',
 	},
 	{
@@ -1428,14 +1388,14 @@ const rawList: RawEntry[] = [
 	{
 		name: 'NestaCMS',
 		github: 'gma/nesta',
-		website: 'http://nestacms.com/',
+		website: 'https://nestacms.com',
 	},
 	{
 		name: 'Netlify Drop',
 		website: 'https://app.netlify.com/drop',
 		description:
 			'Drag and drop a folder with your site’s HTML, CSS, and JS files. We’ll publish them live and give you a link to share it.',
-		is: Is.SSHost,
+		is: 'static site host',
 	},
 	{
 		name: 'Neverland',
@@ -1447,7 +1407,7 @@ const rawList: RawEntry[] = [
 		website: 'https://subtype.de/newcomen/',
 		license: 'GPL-3.0',
 		language: 'Perl',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: true,
 	},
 	{
@@ -1458,7 +1418,7 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'nib',
-		github: 'jreese/nib',
+		github: 'amyreese/nib',
 	},
 	{
 		name: 'Nibbleblog',
@@ -1496,13 +1456,13 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'Nuxt.js',
-		github: 'nuxt/nuxt.js',
-		website: 'https://nuxtjs.org/',
+		github: 'nuxt/nuxt',
+		website: 'https://nuxt.com',
 	},
 	{
 		name: 'o-blog',
 		github: 'renard/o-blog',
-		website: 'http://renard.github.io/o-blog-v2/',
+		website: 'https://renard.github.io/o-blog-v2/',
 		license: 'WTFPL',
 	},
 	{
@@ -1516,7 +1476,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Ocam',
 		github: 'toddlucas/ocam',
-		website: 'http://toddlucas.github.io/ocam/',
+		website: 'https://toddlucas.github.io/ocam/',
 	},
 	{
 		name: 'Octopress',
@@ -1525,7 +1485,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'onessg',
 		github: 'RyanZim/onessg',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'operator-DD3',
@@ -1542,25 +1502,24 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Orchid',
 		github: 'orchidhq/Orchid',
-		website: 'https://orchid.run',
 		created_at: '2018-03-19T00:00:00Z',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: true,
 	},
-	
 	{
 		name: 'Page',
 		github: 'fmalina/page',
 		license: 'BSD-3-Clause',
 		language: 'Python',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: true,
-		description: 'A static website generator that creates a well organized website with clear navigation reflecting the folder structure of source text documents. Produces fast, well compressed, mobile friendly pages, feed and sitemap files and supports import from any CMS DB',
+		description:
+			'A static website generator that creates a well organized website with clear navigation reflecting the folder structure of source text documents. Produces fast, well compressed, mobile friendly pages, feed and sitemap files and supports import from any CMS DB',
 	},
 	{
 		name: 'Pagegen',
-		github: 'oliverfields/pagegen_v2',
-		website: 'http://pagegen.phnd.net/',
+		github: 'oliverfields/pagegen',
+		website: 'https://pagegen.phnd.net',
 	},
 	{
 		name: 'Pagen',
@@ -1583,17 +1542,10 @@ const rawList: RawEntry[] = [
 		language: 'Perl',
 	},
 	{
-		name: 'pblog',
-		website: 'https://pblog.xyz/',
-		license: 'ISC',
-		language: 'Shell',
-		description: 'Pandoc static blog generator. 5-second configuration. Markdown. Valid RSS 2.0 feed. No advanced template layouts. No themes. No categories / tagging systems. No comments. No auto rebuilds for local testing. But you can add these things yourself with a little know-how and patience',
-	},
-	{
 		name: 'Pelican',
 		github: 'getpelican/pelican',
 		license: 'GPL-3.0',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: true,
 	},
 	{
@@ -1606,7 +1558,8 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'Phenomic',
-		github: 'phenomic/phenomic',
+		github: 'MoOx/phenomic',
+		defunct: true,
 	},
 	{
 		name: 'Phileas',
@@ -1630,14 +1583,6 @@ const rawList: RawEntry[] = [
 		license: 'Apache-2.0',
 	},
 	{
-		name: 'Pigmeat',
-		github: 'MadeByEmil/Pigmeat',
-		license: 'GPL-3.0',
-		website: 'https://madebyemil.github.io/pigmeat-website',
-		language: 'C#',
-		description: 'A static content publishing tool for the modern web.',
-	},
-	{
 		name: 'Pilcrow',
 		github: 'ljcooke/pilcrow',
 		defunct: true,
@@ -1653,7 +1598,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'poet',
 		github: 'jsantell/poet',
-		website: 'http://jsantell.github.io/poet/',
+		website: 'https://jsantell.github.io/poet/',
 	},
 	{
 		name: 'Pointless',
@@ -1671,7 +1616,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'pop',
 		github: 'alexyoung/pop',
-		website: 'https://github.com/alexyoung/pop',
 	},
 	{
 		name: 'portable-php',
@@ -1694,7 +1638,7 @@ const rawList: RawEntry[] = [
 		website: 'https://prismic.io',
 		description:
 			'A hosted, API based and developer friendly CMS backend. We take care of upgrades, scalability and security.',
-		is: Is.SSEditor,
+		is: 'static site editor',
 	},
 	{
 		name: 'Propeller',
@@ -1703,17 +1647,17 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'Prose',
-		website: 'http://prose.io',
+		website: 'https://prose.io',
 		description:
 			'Prose is a content editor for GitHub designed for managing websites.',
-		is: Is.SSEditor,
+		is: 'static site editor',
 	},
 	{
 		name: 'Prosopopee',
 		github: 'Psycojoker/prosopopee',
 		website: false,
 		language: 'Python',
-		is: Is.SSEditor,
+		is: 'static site editor',
 		extensible: true,
 	},
 	{
@@ -1722,7 +1666,7 @@ const rawList: RawEntry[] = [
 		license: false,
 		language: 'PHP',
 		description: 'The easiest flat-file CMS for designers and their clients.',
-		is: Is.SSEditor,
+		is: 'static site editor',
 	},
 	{
 		name: 'Punch',
@@ -1736,7 +1680,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'PyBlosxom',
 		github: 'pyblosxom/pyblosxom',
-		website: 'http://pyblosxom.github.io/',
+		website: 'https://pyblosxom.github.io',
 		defunct: true,
 	},
 	{
@@ -1751,7 +1695,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Qgoda',
 		github: 'gflohr/qgoda',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: true,
 	},
 	{
@@ -1779,12 +1723,11 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Rassmalog',
 		github: 'sunaku/rassmalog',
-		website: 'http://snk.tuxfamily.org/lib/rassmalog/doc/guide.html',
+		website: 'https://snk.tuxfamily.org/lib/rassmalog/doc/guide.html',
 	},
 	{
 		name: 'rawk',
 		github: 'kisom/rawk',
-		website: 'https://github.com/kisom/rawk',
 	},
 	{
 		name: 'reacat',
@@ -1855,7 +1798,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'RubyFrontier',
 		github: 'mattneub/RubyFrontier',
-		website: 'http://www.apeth.com/RubyFrontierDocs/default.html',
+		website: 'https://www.apeth.com/RubyFrontierDocs/default.html',
 		license: 'MIT',
 	},
 	{
@@ -1869,7 +1812,7 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'saait',
-		website: 'http://codemadness.org/saait.html',
+		website: 'https://codemadness.org/saait.html',
 		license: 'ISC',
 	},
 	{
@@ -1877,13 +1820,13 @@ const rawList: RawEntry[] = [
 		github: 'kristapsdz/sblg',
 		website: 'https://kristaps.bsd.lv/sblg/',
 		language: 'C',
-		description: 'Generate static HTML files, Atom feeds, and JSON files. You write your XHTML articles and templates. You can write articles in any format — like Markdown — so long it converts into XHTML. sblg(1) pulls data from the articles and merges it into the templates. Orchestrated with a Makefile'
+		description:
+			'Generate static HTML files, Atom feeds, and JSON files. You write your XHTML articles and templates. You can write articles in any format — like Markdown — so long it converts into XHTML. sblg(1) pulls data from the articles and merges it into the templates. Orchestrated with a Makefile',
 	},
 	{
 		name: 'Scroll',
-		github: 'publicdomaincompany/scroll',
-		website: 'https://scroll.pub/',
-		is: Is.SSGenerator,
+		github: 'breck7/scroll',
+		is: 'static site generator',
 		language: 'JavaScript',
 		extensible: true,
 	},
@@ -1901,7 +1844,7 @@ const rawList: RawEntry[] = [
 		github: 'pachacamac/sessg',
 		license: 'MIT',
 		description: 'Simple Extendable Static Site Generator',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		language: 'JavaScript',
 		extensible: true,
 	},
@@ -1916,7 +1859,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Serve',
 		github: 'jlong/serve',
-		website: 'http://get-serve.com/',
+		website: 'https://get-serve.com',
 	},
 	{
 		name: 'SG',
@@ -1968,16 +1911,13 @@ const rawList: RawEntry[] = [
 		github: 'wlangstroth/simple-static',
 	},
 	{
-		name: 'simple-website',
-		github: 'alexanderte/simple-website',
-	},
-	{
 		name: 'simsalabash',
 		github: 'markusfisch/simsalabash',
 	},
 	{
 		name: 'Site builder',
-		github: 'inanimatt/site-builder',
+		github: 'mattattui/site-builder',
+		defunct: true,
 	},
 	{
 		name: 'Site builder console',
@@ -1985,7 +1925,7 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'Site44',
-		website: 'http://www.site44.com/',
+		website: 'https://www.site44.com',
 		license: false,
 		language: 'Web',
 	},
@@ -2004,7 +1944,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'sitio',
 		github: 'fiatjaf/sitio',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: true,
 	},
 	{
@@ -2014,7 +1954,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'snowshoe',
 		github: 'edvanbeinum/snowshoe',
-		website: 'https://github.com/edvanbeinum/snowshoe',
 	},
 	{
 		name: 'Soapbox',
@@ -2023,7 +1962,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Socrates',
 		github: 'honza/socrates',
-		website: 'http://honza.ca/socrates/',
+		website: 'https://honza.ca/socrates-site-generator',
 	},
 	{
 		name: 'sortastatic',
@@ -2036,7 +1975,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Spelt',
 		github: 'njdehoog/Spelt',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'SPG',
@@ -2057,17 +1996,8 @@ const rawList: RawEntry[] = [
 		github: 'SpinaCMS/Spina',
 	},
 	{
-		name: 'Spine',
-		github: 'varl/spine',
-	},
-	{
 		name: 'Spress',
 		github: 'spress/Spress',
-	},
-	{
-		name: 'Spring Board',
-		github: 'htaidirt/SpringBoard',
-		license: 'MIT',
 	},
 	{
 		name: 'Squid',
@@ -2075,11 +2005,10 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'squido',
-		website: 'https://squido.org',
 		license: 'MIT',
-		language: 'Node.js',
 		github: 'mrvautin/squido',
-		description: 'A dead simple static HTML website builder which can be hosted anywhere for super fast websites and very little effort.',
+		description:
+			'A dead simple static HTML website builder which can be hosted anywhere for super fast websites and very little effort.',
 		created_at: '2021-04-23T15:46:08Z',
 	},
 	{
@@ -2109,7 +2038,8 @@ const rawList: RawEntry[] = [
 		website: 'https://www.stapy.net/',
 		license: 'BSD-2-Clause',
 		language: 'Python',
-		description: 'A Static Site Generator that can generate a Website without a command line.',
+		description:
+			'A Static Site Generator that can generate a Website without a command line.',
 	},
 	{
 		name: 'Stasis',
@@ -2131,10 +2061,9 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Stati',
 		github: 'jfoucher/stati',
-		website: 'https://github.com/jfoucher/stati',
 		description:
 			'A static site generator written in PHP that can work with any (most) existing Jekyll site, but can be easily extended in your (and my) favorite programming language, PHP!',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: true,
 	},
 	{
@@ -2145,7 +2074,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Static Site Boilerplate',
 		github: 'ericalli/static-site-boilerplate',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'Static Website Starter Kit',
@@ -2166,7 +2095,7 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'staticjinja',
-		github: 'Ceasar/staticjinja',
+		github: 'staticjinja/staticjinja',
 	},
 	{
 		name: 'StaticMatic',
@@ -2211,7 +2140,7 @@ const rawList: RawEntry[] = [
 		name: 'Statiq',
 		github: 'statiqdev/Statiq.Framework',
 		extensible: true,
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'Statix',
@@ -2222,13 +2151,8 @@ const rawList: RawEntry[] = [
 		name: 'Statocles',
 		github: 'preaction/Statocles',
 		license: 'Artistic-1.0-Perl',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: true,
-	},
-	{
-		name: 'Stog',
-		github: 'zoggy/stog',
-		website: 'http://zoggy.github.io/stog/',
 	},
 	{
 		name: 'StrangeCase',
@@ -2244,10 +2168,11 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'Surge',
+		github: 'sintaxi/surge',
 		website: 'https://surge.sh',
 		description:
 			'Shipping web projects should be fast, easy, and low risk. Surge is static web publishing for Front-End Developers, right from the CLI.',
-		is: Is.SSHost,
+		is: 'static site host',
 	},
 	{
 		name: 'Susi',
@@ -2261,7 +2186,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'SWSG',
 		github: 'derdon/swsg',
-		website: 'http://derdon.github.io/swsg/',
+		website: 'https://derdon.github.io/swsg/',
 	},
 	{
 		name: 'Szyslak',
@@ -2291,18 +2216,17 @@ const rawList: RawEntry[] = [
 		name: 'Tapestry',
 		github: 'tapestry-cloud/tapestry',
 		website: 'https://www.tapestry.cloud',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: true,
 	},
 	{
 		name: 'Tarbell',
 		github: 'tarbell-project/tarbell',
-		website: 'http://www.tarbell.io/',
 		license: 'MIT',
 	},
 	{
 		name: 'tclog',
-		website: 'http://wiki.tcl.tk/9148',
+		website: 'https://wiki.tcl-lang.org/page/tclog',
 		license: 'BSD-3-Clause',
 		language: 'Tcl',
 		description:
@@ -2317,7 +2241,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Techy',
 		github: 'krasimir/techy',
-		website: 'http://krasimir.github.io/techy/',
+		website: 'https://krasimir.github.io/techy/',
 		language: 'JavaScript',
 	},
 	{
@@ -2326,21 +2250,12 @@ const rawList: RawEntry[] = [
 		license: 'Artistic-1.0-Perl',
 	},
 	{
-		name: 'Text Assembler',
-		website: 'http://www.akiwi.co.uk/ta.html',
-		license: false,
-		language: 'JavaScript',
-		description:
-			'A static website generator written in C++ integrating the Google V8 Javascript engine',
-	},
-	{
 		name: 'Thot',
-		github: 'wmark/thot',
+		github: 'mark-kubacki/thot',
 	},
 	{
 		name: 'Tinkerer',
 		github: 'vladris/tinkerer',
-		website: 'http://tinkerer.me/',
 		license: 'BSD-2-Clause-FreeBSD',
 	},
 	{
@@ -2357,25 +2272,23 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'Ultra simple Site Maker',
-		website: 'http://loup-vaillant.fr/projects/ussm/',
+		website: 'https://loup-vaillant.fr/projects/ussm/',
 		license: 'GPL-3.0',
 		language: 'Shell',
 	},
 	{
 		name: 'Urubu',
 		github: 'jandecaluwe/urubu',
-		website: 'http://urubu.jandecaluwe.com',
+		website: 'https://urubu.jandecaluwe.com',
 		license: 'GPL-3.0',
 	},
 	{
 		name: 'Utterson',
 		github: 'pepijndevos/utterson',
-		website: 'https://github.com/pepijndevos/utterson',
 	},
 	{
 		name: 'Utterson',
 		github: 'stef/utterson',
-		website: 'https://github.com/stef/utterson',
 	},
 	{
 		name: 'Uzu',
@@ -2388,12 +2301,13 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'vee',
-		github: 'estrabd/vee',
+		github: '357r4bd/vee-ARCHIVED',
+		defunct: true
 	},
 	{
 		name: 'Vegetables',
 		github: 'partageit/vegetables',
-		website: 'http://partageit.github.io/vegetables/',
+		website: 'https://partageit.github.io/vegetables/',
 	},
 	{
 		name: 'vimwiki',
@@ -2423,7 +2337,7 @@ const rawList: RawEntry[] = [
 		website: 'https://vuepress.vuejs.org/',
 		description: 'Vue-powered Static Site Generator',
 		created_at: '2018-04-12T22:41:30Z',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: true,
 	},
 	{
@@ -2444,7 +2358,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Weaver',
 		github: 'davidsiaw/weaver',
-		website: 'http://davidsiaw.github.io/weaver-docs/',
+		website: 'https://davidsiaw.github.io/weaver-docs/',
 	},
 	{
 		name: 'Webby',
@@ -2496,14 +2410,14 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'WP2Static',
-		github: 'WP2Static/wp2static',
-		is: Is.SSExporter,
+		github: 'elementor/wp2static',
+		is: 'static site exporter',
 	},
 	{
 		name: 'WPWMM4',
 		github: 'uzsolt/wpwmm4',
 		language: 'Makefile, m4',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 		extensible: true,
 	},
 	{
@@ -2526,7 +2440,7 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'Yggdrasil',
-		website: 'http://www.psyke.org/yggdrasil/',
+		website: 'https://www.psyke.org/yggdrasil/',
 		license: 'GPL-2.0',
 		language: 'Perl',
 		created_at: '2002-07-17T00:00:00.000Z',
@@ -2542,7 +2456,7 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'zas',
-		github: 'imdario/zas',
+		github: 'darccio/zas',
 	},
 	{
 		name: 'ZenWeb',
@@ -2553,7 +2467,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Zine',
 		github: 'mikekreuzer/zine',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'zodiac',
@@ -2567,7 +2481,7 @@ const rawList: RawEntry[] = [
 			'Your one-stop static site engine. Forget dependencies. Everything you need in one binary. Previously called Gutenberg until WordPress took the name.',
 		created_at: '2016-12-06T13:51:00+08:00',
 		updated_at: '2020-09-28T00:00:00+08:00',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 	{
 		name: 'Zucchini',
@@ -2584,7 +2498,7 @@ const rawList: RawEntry[] = [
 		language: 'JavaScript',
 		created_at: '2020-12-11T13:00:00+01:00',
 		updated_at: '2020-12-11T13:00:00+01:00',
-		is: Is.SSGenerator,
+		is: 'static site generator',
 	},
 ]
 export default rawList

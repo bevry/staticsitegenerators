@@ -4,10 +4,10 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "maxNodeModuleJsDepth": 5,
-    "moduleResolution": "Node",
+    "module": "esnext",
+    "moduleResolution": "node",
     "strict": true,
-    "target": "ESNext",
-    "lib": []
+    "target": "es2023"
   },
-  "include": ["source"]
+  "include": ["source", "raw.json", "raw.json.d.ts"],
 }

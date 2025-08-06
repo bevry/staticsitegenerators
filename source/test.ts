@@ -1,49 +1,65 @@
+/* eslint-disable no-console */
+
 import kava from 'kava'
-import fs from 'fs'
-import { join } from 'path'
-import { equal, deepEqual, compare } from 'assert-helpers'
-import { ok } from 'assert'
-import fetch from 'cross-fetch'
+import fs from 'node:fs'
+import { join } from 'node:path'
+import { equal, deepEqual } from 'assert-helpers'
+import { ok } from 'node:assert'
 import validSPDX from 'spdx-expression-validate'
 
-import rawList from './list.js'
-import { hydrate, HydrateReturn } from './util.js'
+import rawList from './list.js' // eslint-disable-line
+import { hydrate, HydrateReturn } from './util.js' // eslint-disable-line
 
 import filedirname from 'filedirname'
-const [file, dir] = filedirname()
+const [, dir] = filedirname()
 const rawPath = join(dir, '..', 'raw.json')
+const rawSourcePath = join(dir, '..', 'source', 'list.ts')
 const hydratedPath = join(dir, '..', 'hydrated.json')
 
-const fetchOptions: RequestInit = {
+const fetchOptions: unknown = {
 	// timeout: 30 * 1000,
 	redirect: 'error',
 }
 
-function log(logLevel: string | number, ...args: any) {
+/**
+ * Log a message with the specified log level. Debug level messages are filtered out.
+ * @param logLevel The log level - messages with level 7 or 'debug' will be filtered out
+ * @param args The arguments to log to the console
+ */
+function log(logLevel: string | number, ...args: unknown[]) {
 	if (logLevel === 7 || logLevel === 'debug') return
 	console.log.apply(console.log, [logLevel, ...args])
 }
 
+/**
+ * Pause execution for the specified number of milliseconds.
+ * @param milliseconds The number of milliseconds to wait, warns if value is less than 1000
+ * @returns A promise that resolves after the specified delay
+ */
 export function halt(milliseconds: number) {
 	if (milliseconds < 1000) {
 		console.warn(
-			'halt accepts milliseconds, you may have attempted to send it seconds, as you sent a value below 1000 milliseconds'
+			'halt accepts milliseconds, you may have attempted to send it seconds, as you sent a value below 1000 milliseconds',
 		)
 	}
-	return new Promise(function (resolve, reject) {
+	return new Promise(function (resolve) {
 		setTimeout(resolve, milliseconds)
 	})
 }
 
-export async function fetcher(
-	url: string,
-	init: RequestInit
-): Promise<Response> {
+/**
+ * Fetch a URL with automatic retry on 429 (rate limit) responses.
+ * @param url The URL to fetch
+ * @param init The fetch options and configuration object for the request
+ * @returns A promise that resolves to the fetch Response
+ */
+export async function fetcher(url: string, init: unknown): Promise<Response> {
+	// @ts-expect-error RequestInit is not yet available to our types even though fetch is
 	const response = await fetch(url, init)
 	if (response.status === 429) {
 		// wait a minute
 		console.warn(
-			`${url} returned 429, too many requests, trying again in a minute`
+			`${url} returned 429, too many requests, trying again in a minute`,
 		)
 		await halt(60 * 1000)
 		return fetcher(url, init)
@@ -51,18 +67,25 @@ export async function fetcher(
 	return response
 }
 
+/**
+ * Check if a URL is accessible by making a HEAD request through a status checking service.
+ * @param url The URL to check for accessibility
+ * @returns A promise that resolves if the URL is accessible, rejects if not
+ */
 async function checkURL(url: string) {
 	try {
-		// use a response that caches heavily
-		const u = new URL('https://status.bevry.workers.dev')
-		u.searchParams.set('url', url)
-		const res = await fetcher(u.toString(), fetchOptions)
-		if (!res.ok)
+		// use a response that caches heavily <-- no longer exists and I cannot find a backup
+		// const u = new URL('https://status.bevry.workers.dev')
+		// u.searchParams.set('url', url)
+		// const res = await fetcher(u.toString(), fetchOptions)
+		const res = await fetcher(url, fetchOptions)
+		if (!res.ok) {
 			equal(
 				res.status,
 				200,
-				`checkURL: response http status code should be 200 success on ${url}`
+				`checkURL: response http status code should be 200 success on ${url}`,
 			)
+		}
 	} catch (err) {
 		return Promise.reject(err)
 	}
@@ -70,22 +93,22 @@ async function checkURL(url: string) {
 
 kava.suite('static site generators list', function (suite, test) {
 	test('minimum required fields', function () {
-		const missingIs: string[] = []
+		// const missingIs: string[] = []
 		rawList.forEach(function (entry) {
-			const { name, github, gitlab, bitbucket, website, is } = entry
+			const { name, github, gitlab, bitbucket, website } = entry // , is
 			const location = github || gitlab || bitbucket || website
 			equal(
 				Boolean(name && location),
 				true,
-				`missing required fields on ${name || location}`
+				`missing required fields on ${name || location}`,
 			)
-			if (!is) missingIs.push(name)
+			// if (!is) missingIs.push(name)
 		})
-		console.warn(
-			`The following entries are missing the "is" field, please add what you can if you have time:\n${missingIs.join(
-				', '
-			)}`
-		)
+		// console.warn(
+		// 	`The following ${missingIs.length} entries are missing the "is" field, please add what you can if you have time:\n${missingIs.join(
+		// 		', ',
+		// 	)}`,
+		// )
 	})
 
 	test('licenses are valid SPDX', function () {
@@ -94,15 +117,15 @@ kava.suite('static site generators list', function (suite, test) {
 				equal(
 					validSPDX(license),
 					true,
-					`${name}: license of ${license} is not a valid SPDX identifier: http://spdx.org/licenses/`
+					`${name}: license of ${license} is not a valid SPDX identifier: http://spdx.org/licenses/`,
 				)
 			}
 		})
 	})
 
 	suite('uris are valid / still exist', function (suite, test) {
-		// @ts-ignore
-		this.setConfig({ concurrency: 25 })
+		// @ts-expect-error kava isn't typed
+		this.setConfig({ concurrency: 50 })
 		rawList.forEach(function ({ name, github, website, testWebsite }) {
 			if (github) {
 				github = `https://github.com/${github}`
@@ -140,8 +163,23 @@ kava.suite('static site generators list', function (suite, test) {
 			fs.writeFile(
 				rawPath,
 				JSON.stringify(result.raw, null, '  '),
-				// @ts-ignore
-				done
+				// @ts-expect-error kava isn't typed
+				done,
+			)
+		})
+
+		test(`writing corrected raw source listing ${rawSourcePath}`, function (done) {
+			const rawData = JSON.stringify(result.raw, null, '  ')
+			fs.writeFile(
+				rawSourcePath,
+				[
+					`import type { RawEntry } from './types.js' // eslint-disable-line`,
+					`const rawList: RawEntry[] = ${rawData}`,
+					`export default rawList`,
+					'',
+				].join('\n'),
+				// @ts-expect-error kava isn't typed
+				done,
 			)
 		})
 
@@ -149,17 +187,17 @@ kava.suite('static site generators list', function (suite, test) {
 			fs.writeFile(
 				hydratedPath,
 				JSON.stringify(result.hydrated, null, '  '),
-				// @ts-ignore
-				done
+				// @ts-expect-error kava isn't typed
+				done,
 			)
 		})
 
 		test('raw data was the same as the corrected data', function () {
 			try {
 				deepEqual(rawList, result.raw)
-			} catch (err) {
+			} catch {
 				console.warn(
-					'there are fields within source/list.ts that can be truncated as they are now automated, please apply the relevant changes'
+					'there are fields within source/list.ts that can be truncated as they are now automated, please apply the relevant changes',
 				)
 			}
 		})

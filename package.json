@@ -1,13 +1,21 @@
 {
   "title": "Static Site Generators Listing",
   "name": "staticsitegenerators",
-  "version": "3.1.0",
-  "description": "A comprehensive, partially automatically generated comparison of static site generators with some minimal meta data about them",
-  "homepage": "https://github.com/bevry/staticsitegenerators-list",
+  "version": "4.0.0",
   "license": "Unlicense",
+  "description": "A comprehensive, partially automatically generated comparison of static site generators with some minimal meta data about them",
+  "homepage": "https://github.com/bevry/staticsitegenerators",
+  "funding": "https://bevry.me/fund",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bevry/staticsitegenerators.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bevry/staticsitegenerators/issues"
+  },
   "keywords": [
     "browser",
-    "es2019",
+    "es2023",
     "module",
     "node",
     "static",
@@ -19,45 +27,41 @@
   ],
   "badges": {
     "list": [
-      "travisci",
+      "githubworkflow",
       "npmversion",
       "npmdownloads",
-      "daviddm",
-      "daviddmdev",
       "---",
       "githubsponsors",
-      "patreon",
-      "flattr",
+      "thanksdev",
       "liberapay",
       "buymeacoffee",
       "opencollective",
       "crypto",
       "paypal",
-      "wishlist"
+      "---",
+      "discord",
+      "twitch"
     ],
     "config": {
+      "githubWorkflow": "bevry",
       "githubSponsorsUsername": "balupton",
-      "buymeacoffeeUsername": "balupton",
-      "cryptoURL": "https://bevry.me/crypto",
-      "flattrUsername": "balupton",
+      "thanksdevGithubUsername": "bevry",
       "liberapayUsername": "bevry",
+      "buymeacoffeeUsername": "balupton",
       "opencollectiveUsername": "bevry",
-      "patreonUsername": "bevry",
+      "cryptoURL": "https://bevry.me/crypto",
       "paypalURL": "https://bevry.me/paypal",
-      "wishlistURL": "https://bevry.me/wishlist",
-      "travisTLD": "com",
-      "githubUsername": "bevry",
-      "githubRepository": "staticsitegenerators-list",
-      "githubSlug": "bevry/staticsitegenerators-list",
-      "npmPackageName": "staticsitegenerators"
+      "discordServerID": "1147436445783560193",
+      "discordServerInvite": "nQuXddV7VP",
+      "twitchUsername": "balupton"
     }
   },
-  "funding": "https://bevry.me/fund",
-  "author": "2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me), 2013 Jasper Van der Jeugt <jaspervdj@gmail.com> (http://jaspervdj.be)",
+  "author": "2013+ Benjamin Lupton <b@lupton.cc> (https://balupton.com) (https://github.com/balupton), 2013 Jasper Van der Jeugt <jaspervdj@gmail.com> (https://jaspervdj.be)",
   "maintainers": [
     "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
     "Craig Davison <craig@davison.io> (https://github.com/davisonio)",
-    "Jasper Van der Jeugt <jaspervdj@gmail.com> (https://github.com/jaspervdj)"
+    "Cthulhux (https://github.com/dertuxmalwieder)",
+    "Manvel Saroyan <saroyanm@gmail.com> (https://github.com/Manvel)"
   ],
   "contributors": [
     "AJ ONeal <coolaj86@gmail.com> (https://github.com/solderjs)",
@@ -270,15 +274,25 @@
     "zigg <matt@zigg.com> (https://github.com/zigg)",
     "Átila Camurça Alves <camurca.home@gmail.com> (https://github.com/atilacamurca)"
   ],
-  "bugs": {
-    "url": "https://github.com/bevry/staticsitegenerators-list/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bevry/staticsitegenerators-list.git"
-  },
+  "donors": [
+    "Ángel González <aglezabad@gmail.com> (https://github.com/Aglezabad) (https://twitter.com/Aglezabad)",
+    "Armen Mkrtchian <armen.mkrtchian@gmail.com> (https://github.com/Armenm) (https://twitter.com/armen_mkrtchian)",
+    "cryptoquick (https://github.com/cryptoquick)",
+    "dr-dimitru (https://github.com/dr-dimitru)",
+    "elliottditman <elliottditman@gmail.com> (https://github.com/elliottditman) (https://patreon.com/user?u=15026448)",
+    "github (https://github.com/github)",
+    "hispanic (https://github.com/hispanic)",
+    "Lee Driscoll <lsdriscoll@icloud.com> (https://github.com/leedriscoll) (https://patreon.com/user?u=5292556)",
+    "mrhenry (https://github.com/mrhenry)",
+    "nermalcat69 (https://github.com/nermalcat69)",
+    "pleo-io (https://github.com/pleo-io)",
+    "rdeforest (https://github.com/rdeforest)",
+    "Scott Kempson <scottkempson@gmail.com> (https://github.com/scokem) (https://twitter.com/scokem)",
+    "skunkteam (https://github.com/skunkteam)",
+    "WriterJohnBuck (https://github.com/WriterJohnBuck)"
+  ],
   "engines": {
-    "node": ">=14"
+    "node": ">=21"
   },
   "editions": [
     {
@@ -286,16 +300,18 @@
       "directory": "source",
       "entry": "index.ts",
       "tags": [
+        "source",
         "typescript",
         "import"
       ],
       "engines": false
     },
     {
-      "description": "TypeScript compiled against ES2019 for web browsers with Import for modules",
+      "description": "TypeScript compiled against ES2024 for web browsers with Import for modules",
       "directory": "edition-browsers",
       "entry": "index.js",
       "tags": [
+        "compiled",
         "javascript",
         "import"
       ],
@@ -305,83 +321,100 @@
       }
     },
     {
-      "description": "TypeScript compiled against ES2019 for Node.js with Require for modules",
-      "directory": "edition-es2019",
+      "description": "TypeScript compiled against ES2023 for Node.js with Import for modules",
+      "directory": "edition-es2023-esm",
       "entry": "index.js",
       "tags": [
+        "compiled",
         "javascript",
-        "es2019",
-        "require"
+        "es2023",
+        "import"
       ],
       "engines": {
-        "node": "14",
+        "node": true,
         "browsers": false
       }
+    },
+    {
+      "description": "TypeScript compiled Types with Import for modules",
+      "directory": "edition-types",
+      "entry": "index.d.ts",
+      "tags": [
+        "compiled",
+        "types",
+        "import"
+      ],
+      "engines": false
     }
   ],
-  "types": "source/index.ts",
-  "type": "commonjs",
-  "main": "edition-es2019/index.js",
+  "types": "edition-types/index.d.ts",
+  "type": "module",
+  "main": "edition-es2023-esm/index.js",
+  "exports": {
+    "node": {
+      "types": "./edition-types/index.d.ts",
+      "import": "./edition-es2023-esm/index.js"
+    },
+    "browser": {
+      "types": "./edition-types/index.d.ts",
+      "import": "./edition-browsers/index.js"
+    }
+  },
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
-  "dependencies": {
-    "githubauthreq": "^5.3.0"
-  },
   "devDependencies": {
-    "@bevry/update-contributors": "^1.4.0",
-    "@typescript-eslint/eslint-plugin": "^2.31.0",
-    "@typescript-eslint/parser": "^2.31.0",
-    "arrangekeys": "^4.1.0",
-    "assert-helpers": "^6.2.0",
-    "eslint": "^7.0.0",
-    "eslint-config-bevry": "^3.4.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.3",
-    "filedirname": "^2.2.0",
-    "getrepos": "^5.2.1",
-    "kava": "^5.0.0",
-    "prettier": "^2.0.5",
-    "projectz": "^2.0.0",
+    "@bevry/github-api": "^11.4.0",
+    "@types/node": "^24.2.0",
+    "arrangekeys": "^6.7.0",
+    "assert-helpers": "^11.12.0",
+    "eslint": "^9.32.0",
+    "eslint-config-bevry": "^6.0.0",
+    "filedirname": "^3.4.0",
+    "kava": "^7.9.0",
+    "prettier": "^3.6.2",
+    "projectz": "^4.2.0",
     "spdx-expression-validate": "^2.0.0",
     "string-natural-compare": "^3.0.1",
-    "surge": "^0.21.3",
-    "typedoc": "^0.17.6",
-    "typescript": "^3.8.3",
-    "valid-directory": "^1.6.0",
-    "valid-module": "^1.0.0"
+    "typedoc": "^0.28.9",
+    "typescript": "5.9.2",
+    "valid-directory": "^4.9.0",
+    "valid-module": "^2.6.0"
   },
   "scripts": {
-    "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
-    "our:compile": "npm run our:compile:edition-browsers && npm run our:compile:edition-es2019",
-    "our:compile:edition-browsers": "tsc --module ESNext --target ES2019 --outDir ./edition-browsers --project tsconfig.json && test -d edition-browsers/source && ( mv edition-browsers/source edition-temp && rm -Rf edition-browsers && mv edition-temp edition-browsers ) || true",
-    "our:compile:edition-es2019": "tsc --module commonjs --target ES2019 --outDir ./edition-es2019 --project tsconfig.json && test -d edition-es2019/source && ( mv edition-es2019/source edition-temp && rm -Rf edition-es2019 && mv edition-temp edition-es2019 ) || true",
-    "our:deploy": "echo no need for this project",
-    "our:meta": "npm run our:meta:contributors && npm run our:meta:docs && npm run our:meta:projectz",
-    "our:meta:contributors": "npx @bevry/update-contributors",
+    "our:clean": "rm -rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
+    "our:compile": "npm run our:compile:edition-browsers && npm run our:compile:edition-es2023-esm && npm run our:compile:edition-types",
+    "our:compile:edition-browsers": "tsc --module esnext --target es2024 --outDir ./edition-browsers --project tsconfig.json && ( test ! -d edition-browsers/source || ( mv edition-browsers/source edition-temp && rm -rf edition-browsers && mv edition-temp edition-browsers ) )",
+    "our:compile:edition-es2023-esm": "tsc --module esnext --target es2023 --outDir ./edition-es2023-esm --project tsconfig.json && ( test ! -d edition-es2023-esm/source || ( mv edition-es2023-esm/source edition-temp && rm -rf edition-es2023-esm && mv edition-temp edition-es2023-esm ) ) && printf '%s' '{\"type\": \"module\"}' > edition-es2023-esm/package.json",
+    "our:compile:edition-types": "tsc --emitDeclarationOnly --declaration --declarationMap --declarationDir ./edition-types --project tsconfig.json && ( test ! -d edition-types/source || ( mv edition-types/source edition-temp && rm -rf edition-types && mv edition-temp edition-types ) )",
+    "our:deploy": "printf '%s\n' 'no need for this project'",
+    "our:meta": "npm run our:meta:docs && npm run our:meta:projectz",
     "our:meta:docs": "npm run our:meta:docs:typedoc",
-    "our:meta:docs:typedoc": "rm -Rf ./docs && npx typedoc --mode file --exclude '**/+(*test*|node_modules)' --excludeExternals --name \"$npm_package_name\" --readme ./README.md --out ./docs ./source",
-    "our:meta:projectz": "npx projectz compile",
+    "our:meta:docs:typedoc": "rm -rf ./docs && typedoc --exclude '**/+(*test*|node_modules)' --excludeExternals --out ./docs ./source",
+    "our:meta:projectz": "projectz --offline",
     "our:release": "npm run our:release:prepare && npm run our:release:check-changelog && npm run our:release:check-dirty && npm run our:release:tag && npm run our:release:push",
-    "our:release:check-changelog": "cat ./HISTORY.md | grep v$npm_package_version || (echo add a changelog entry for v$npm_package_version && exit -1)",
+    "our:release:check-changelog": "cat ./HISTORY.md | grep \"v$npm_package_version\" || (printf '%s\n' \"add a changelog entry for v$npm_package_version\" && exit -1)",
     "our:release:check-dirty": "git diff --exit-code",
     "our:release:prepare": "npm run our:clean && npm run our:compile && npm run our:test && npm run our:meta",
-    "our:release:push": "git push origin master && git push origin --tags",
-    "our:release:tag": "export MESSAGE=$(cat ./HISTORY.md | sed -n \"/## v$npm_package_version/,/##/p\" | sed 's/## //' | awk 'NR>1{print buf}{buf = $0}') && test \"$MESSAGE\" || (echo 'proper changelog entry not found' && exit -1) && git tag v$npm_package_version -am \"$MESSAGE\"",
+    "our:release:push": "git push origin && git push origin --tags",
+    "our:release:tag": "export MESSAGE=$(cat ./HISTORY.md | sed -n \"/## v$npm_package_version/,/##/p\" | sed 's/## //' | awk 'NR>1{print buf}{buf = $0}') && test \"$MESSAGE\" || (printf '%s\n' 'proper changelog entry not found' && exit -1) && git tag \"v$npm_package_version\" -am \"$MESSAGE\"",
     "our:setup": "npm run our:setup:install",
     "our:setup:install": "npm install",
     "our:test": "npm run our:verify && npm test",
-    "our:verify": "npm run our:verify:directory && npm run our:verify:eslint && npm run our:verify:module && npm run our:verify:prettier && npm run our:verify:typescript",
-    "our:verify:directory": "npx valid-directory",
-    "our:verify:eslint": "npx eslint --fix --ignore-pattern '**/*.d.ts' --ignore-pattern '**/vendor/' --ignore-pattern '**/node_modules/' --ext .mjs,.js,.jsx,.ts,.tsx ./source",
-    "our:verify:module": "npx valid-module",
-    "our:verify:prettier": "npx prettier --write .",
-    "our:verify:typescript": "npx tsc --noEmit --project tsconfig.json",
-    "test": "node ./edition-es2019/test.js"
+    "our:verify": "npm run our:verify:eslint && npm run our:verify:module && npm run our:verify:prettier",
+    "our:verify:eslint": "eslint --fix",
+    "our:verify:module": "valid-module",
+    "our:verify:prettier": "prettier --write .",
+    "test": "node ./edition-es2023-esm/test.js"
+  },
+  "boundation": {
+    "desiredNodeOnly": true,
+    "expandNodeVersions": false,
+    "shrinkNodeVersions": true,
+    "targetModules": [
+      "import"
+    ]
   },
   "eslintConfig": {
-    "extends": [
-      "bevry"
-    ],
     "rules": {
       "camelcase": 0,
       "no-sync": 0
@@ -389,9 +422,8 @@
   },
   "prettier": {
     "semi": false,
-    "singleQuote": true
-  },
-  "boundation": {
-    "desiredNodeOnly": true
+    "singleQuote": true,
+    "trailingComma": "all",
+    "endOfLine": "lf"
   }
 }
