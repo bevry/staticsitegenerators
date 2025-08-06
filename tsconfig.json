@@ -9,5 +9,5 @@
     "strict": true,
     "target": "es2023"
   },
-  "include": ["source", "raw.json", "raw.json.d.ts"],
+  "include": ["source", "raw.json", "raw.json.d.ts"]
 }

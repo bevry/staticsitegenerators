@@ -1,6 +1,6 @@
-import type { RawEntry, HydratedEntry } from './types.js' // eslint-disable-line
-import hydrated from '../hydrated.json' // eslint-disable-line
-import raw from '../raw.json' // eslint-disable-line
+import type { RawEntry, HydratedEntry } from './types.js'
+import hydrated from '../hydrated.json'
+import raw from '../raw.json'
 
 /**
  * Get the hydrated list of static site generators with enhanced metadata from GitHub API.

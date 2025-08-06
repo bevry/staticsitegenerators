@@ -417,7 +417,9 @@
   "eslintConfig": {
     "rules": {
       "camelcase": 0,
-      "no-sync": 0
+      "import/no-unresolved": 0,
+      "n/no-sync": 0,
+      "n/no-unpublished-import": 0
     }
   },
   "prettier": {

@@ -1,10 +1,10 @@
 /* eslint camelcase:0 */
 
 // Imports
-import { RawEntry, HydratedEntry } from './types.js' // eslint-disable-line
-import naturalCompare from 'string-natural-compare' // eslint-disable-line
-import { validateCredentials, getGitHubRepositories } from '@bevry/github-api' // eslint-disable-line
-import arrangeKeys from 'arrangekeys' // eslint-disable-line
+import { RawEntry, HydratedEntry } from './types.js'
+import naturalCompare from 'string-natural-compare'
+import { validateCredentials, getGitHubRepositories } from '@bevry/github-api'
+import arrangeKeys from 'arrangekeys'
 import crypto from 'node:crypto'
 
 /** The preferred order of keys when arranging entry objects */

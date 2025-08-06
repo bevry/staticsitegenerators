@@ -1,4 +1,4 @@
-import type { RawEntry } from './types.js' // eslint-disable-line
+import type { RawEntry } from './types.js'
 const rawList: RawEntry[] = [
 	{
 		name: 'ABlog',
@@ -37,12 +37,12 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Appernetic',
 		website: 'https://github.com/appernetic',
-		defunct: true,
 		license: false,
 		language: 'Web',
 		description:
 			'A Static Site Generator as a Service. Appernetic is a web service for managing and generating static content for GitHub Pages.',
 		created_at: '2016-01-20T15:46:08Z',
+		defunct: true,
 	},
 	{
 		name: 'assemble',
@@ -52,14 +52,11 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Astro',
 		github: 'withastro/astro',
-		language: 'TypeScript',
 		website: 'https://astro.build',
 	},
 	{
 		name: 'Aurora',
 		github: 'capjamesg/aurora',
-		language: 'Python',
-		license: 'MIT',
 		description:
 			'A fast, extensible static site generator implemented in Python.',
 	},
@@ -76,14 +73,14 @@ const rawList: RawEntry[] = [
 		github: 'awestruct/awestruct',
 	},
 	{
-		created_at: '2021-02-20',
-		defunct: true,
-		is: 'static site generator',
-		language: 'JavaScript',
-		license: 'Unlicense',
 		name: 'Axiom',
-		updated_at: '2023-04-29',
 		website: 'https://forgejo.sny.sh/sun/Axiom',
+		license: 'Unlicense',
+		language: 'JavaScript',
+		created_at: '2021-02-20',
+		updated_at: '2023-04-29',
+		is: 'static site generator',
+		defunct: true,
 	},
 	{
 		name: 'AYM CMS',
@@ -111,12 +108,11 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Basildon',
 		github: 'samwilson/basildon',
-		license: 'GPL-3.0-or-later',
 		website: 'https://basildon.netlify.app/',
+		license: 'GPL-3.0-or-later',
 		description:
 			'A simple generator written in PHP, built around Markdown with Yaml frontmatter that is read into a SQLite database and queried in Twig templates.',
 		is: 'static site generator',
-		language: 'PHP',
 	},
 	{
 		name: 'bazinga',
@@ -146,8 +142,6 @@ const rawList: RawEntry[] = [
 		name: 'Blag',
 		github: 'venthur/blag',
 		description: 'Blog-aware, static site generator',
-		license: 'MIT',
-		language: 'Python',
 		is: 'static site generator',
 	},
 	{
@@ -200,7 +194,6 @@ const rawList: RawEntry[] = [
 		name: 'Bloggrify',
 		github: 'bloggrify/bloggrify',
 		website: 'https://bloggrify.com',
-		license: 'MIT',
 		language: 'Javascript',
 		description: 'Static blog generator built on top of Nuxt and Vue.',
 		is: 'static site generator',
@@ -300,8 +293,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'caixw-blogit',
 		github: 'caixw/blogit',
-		license: 'MIT',
-		language: 'Go',
 		is: 'static site generator',
 	},
 	{
@@ -310,11 +301,9 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'Capro',
-		description: 'Flexible PHP static-site generator',
 		github: 'xy2z/capro',
-		language: 'PHP',
 		website: 'https://capro.xy2z.io',
-		license: 'MIT',
+		description: 'Flexible PHP static-site generator',
 	},
 	{
 		name: 'Carew',
@@ -356,9 +345,9 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'cl-yag',
-		language: 'Common LISP',
 		website:
 			'https://dataswamp.org/~solene/2017-12-16-announcement-cl-yag.html',
+		language: 'Common LISP',
 		description:
 			'Publish a website and/or a gopher hole from a list of articles. Supports different markup language per article',
 	},
@@ -415,8 +404,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Create Static Web',
 		github: 'franciscop/create-static-web',
-		description: 'Another static site generator',
-		license: 'MIT',
 	},
 	{
 		name: 'cub',
@@ -425,10 +412,10 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'Curvenote',
-		description: 'Generate websites from Markdown and Jupyter Notebooks',
 		github: 'curvenote/curvenote',
 		website: 'https://curvenote.com/demos/publish-from-github',
 		license: 'MIT',
+		description: 'Generate websites from Markdown and Jupyter Notebooks',
 		is: 'static site generator',
 	},
 	{
@@ -450,7 +437,6 @@ const rawList: RawEntry[] = [
 		name: 'Daux.io',
 		github: 'dauxio/daux.io',
 		website: 'https://daux.io',
-		license: 'MIT',
 	},
 	{
 		name: 'deplate',
@@ -477,7 +463,6 @@ const rawList: RawEntry[] = [
 		name: 'DocKnot',
 		github: 'rra/docknot',
 		website: 'https://www.eyrie.org/~eagle/software/docknot/',
-		language: 'Perl',
 		description:
 			'Static web site generator with special support for managing software releases. It can generate distribution tarballs and software package documentation from a YAML metadata file and templates. The goal is to generate both web pages and distributed documentation files from the same source, using templates for consistency across multiple packages',
 	},
@@ -495,7 +480,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Docusaurus',
 		github: 'facebook/docusaurus',
-		license: 'MIT',
 		description:
 			'Docusaurus makes it easy to build and maintain Open Source documentation websites.',
 		is: 'static site generator',
@@ -678,10 +662,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Generic Static Site Generator',
 		github: 'theabbie/Generic-Static-Site-Generator',
-		license: 'MIT',
-		language: 'JavaScript',
 		is: 'static site generator',
-		description: 'A Generic Static Site Generator',
 	},
 	{
 		name: 'Genesis',
@@ -718,16 +699,14 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'Glyph',
-		github: 'h3rald/glyph',
-		website: 'https://h3rald.com/glyph/',
-	},
-	{
-		name: 'Glyph',
 		github: 'dbriemann/glyph',
 		website:
 			'https://dbriemann.github.io/blog/2-introducing-glyph-static-site-generator-powered-by-github-issues-and-pages.html',
-		description: 'A static site generator utilizing Github issues and pages.',
-		license: 'MIT',
+	},
+	{
+		name: 'Glyph',
+		github: 'h3rald/glyph',
+		website: 'https://h3rald.com/glyph/',
 	},
 	{
 		name: 'Go-Static!',
@@ -873,14 +852,13 @@ const rawList: RawEntry[] = [
 		github: 'JSRocksHQ/harmonic',
 	},
 	{
-		name: 'haroopress',
-		github: 'rhiokim/haroopress',
-		license: 'MIT',
-	},
-	{
 		name: 'HaroldJS',
 		github: 'harold-js/create-harold-app',
 		website: 'https://www.haroldjs.com',
+	},
+	{
+		name: 'haroopress',
+		github: 'rhiokim/haroopress',
 		license: 'MIT',
 	},
 	{
@@ -943,11 +921,9 @@ const rawList: RawEntry[] = [
 	{
 		name: 'htmd',
 		github: 'Siecje/htmd',
-		language: 'Python',
-		license: 'MIT',
-		is: 'static site generator',
 		created_at: '2015-01-31',
 		updated_at: '2022-03-16',
+		is: 'static site generator',
 	},
 	{
 		name: 'hublo',
@@ -970,12 +946,12 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'Hyde (CHICKEN)',
+		website: 'http://wiki.call-cc.org/eggref/5/hyde',
 		license: 'BSD-3-Clause',
+		language: 'Scheme',
 		description: 'Schemey clone of programs such as Webby and Jekyll',
 		is: 'static site generator',
 		extensible: true,
-		website: 'http://wiki.call-cc.org/eggref/5/hyde',
-		language: 'Scheme',
 	},
 	{
 		name: 'Hydrastic',
@@ -1213,6 +1189,16 @@ const rawList: RawEntry[] = [
 		website: 'https://liquidluck.readthedocs.io/en/latest/',
 	},
 	{
+		name: 'Log4brains',
+		github: 'thomvaill/log4brains',
+		language: 'JavaScript',
+		description:
+			'Docs-as-code knowledge base to manage Architecture Decision Records (ADR) for your project and publish them automatically as a static website.',
+		created_at: '2020-12-11T13:00:00+01:00',
+		updated_at: '2020-12-11T13:00:00+01:00',
+		is: 'static site generator',
+	},
+	{
 		name: 'Logya',
 		github: 'yaph/logya',
 		description:
@@ -1230,7 +1216,6 @@ const rawList: RawEntry[] = [
 		website: 'https://lume.land',
 		description: 'Fast and flexible static site generator for Deno.',
 		created_at: '2020-09-07T19:24:00Z',
-		license: 'MIT',
 		is: 'static site generator',
 	},
 	{
@@ -1305,7 +1290,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'metalsmith',
 		github: 'metalsmith/metalsmith',
-		license: 'MIT',
 	},
 	{
 		name: 'Miblo',
@@ -1319,7 +1303,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Minimal',
 		github: 'lutzroeder/Minimal',
-		language: 'JavaScript',
 		description:
 			'Personal static website and blog generator for Go, Node.js and Python. No external dependencies and requires only a few hundred lines of code to run.',
 	},
@@ -1414,7 +1397,6 @@ const rawList: RawEntry[] = [
 		name: 'Next.js',
 		github: 'vercel/next.js',
 		website: 'https://nextjs.org',
-		license: 'MIT',
 	},
 	{
 		name: 'nib',
@@ -1510,11 +1492,10 @@ const rawList: RawEntry[] = [
 		name: 'Page',
 		github: 'fmalina/page',
 		license: 'BSD-3-Clause',
-		language: 'Python',
-		is: 'static site generator',
-		extensible: true,
 		description:
 			'A static website generator that creates a well organized website with clear navigation reflecting the folder structure of source text documents. Produces fast, well compressed, mobile friendly pages, feed and sitemap files and supports import from any CMS DB',
+		is: 'static site generator',
+		extensible: true,
 	},
 	{
 		name: 'Pagegen',
@@ -1569,13 +1550,11 @@ const rawList: RawEntry[] = [
 	{
 		name: 'PhlyBlog',
 		github: 'phly/PhlyBlog',
-		license: 'BSD-2-Clause',
 	},
 	{
 		name: 'PHPetite',
-		website: 'https://phpetite.org/',
 		github: 'bradleytaunt/phpetite',
-		language: 'PHP',
+		website: 'https://phpetite.org/',
 	},
 	{
 		name: 'PieCrust',
@@ -1622,7 +1601,6 @@ const rawList: RawEntry[] = [
 		github: 'cadars/portable-php',
 		website: 'https://portable.fyi',
 		language: 'PHP',
-		license: 'MIT',
 	},
 	{
 		name: 'PowerSite',
@@ -1661,6 +1639,10 @@ const rawList: RawEntry[] = [
 		extensible: true,
 	},
 	{
+		name: 'Publii',
+		github: 'GetPublii/Publii',
+	},
+	{
 		name: 'Pulse CMS',
 		website: 'https://www.pulsecms.com/',
 		license: false,
@@ -1672,10 +1654,6 @@ const rawList: RawEntry[] = [
 		name: 'Punch',
 		github: 'laktek/punch',
 		website: 'https://laktek.github.io/punch/',
-	},
-	{
-		name: 'Publii',
-		github: 'GetPublii/Publii',
 	},
 	{
 		name: 'PyBlosxom',
@@ -1819,7 +1797,6 @@ const rawList: RawEntry[] = [
 		name: 'sblg',
 		github: 'kristapsdz/sblg',
 		website: 'https://kristaps.bsd.lv/sblg/',
-		language: 'C',
 		description:
 			'Generate static HTML files, Atom feeds, and JSON files. You write your XHTML articles and templates. You can write articles in any format — like Markdown — so long it converts into XHTML. sblg(1) pulls data from the articles and merges it into the templates. Orchestrated with a Makefile',
 	},
@@ -1827,7 +1804,6 @@ const rawList: RawEntry[] = [
 		name: 'Scroll',
 		github: 'breck7/scroll',
 		is: 'static site generator',
-		language: 'JavaScript',
 		extensible: true,
 	},
 	{
@@ -1838,15 +1814,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Second Crack',
 		github: 'marcoarment/secondcrack',
-	},
-	{
-		name: 'sessg',
-		github: 'pachacamac/sessg',
-		license: 'MIT',
-		description: 'Simple Extendable Static Site Generator',
-		is: 'static site generator',
-		language: 'JavaScript',
-		extensible: true,
 	},
 	{
 		name: 'serif',
@@ -1860,6 +1827,13 @@ const rawList: RawEntry[] = [
 		name: 'Serve',
 		github: 'jlong/serve',
 		website: 'https://get-serve.com',
+	},
+	{
+		name: 'sessg',
+		github: 'pachacamac/sessg',
+		description: 'Simple Extendable Static Site Generator',
+		is: 'static site generator',
+		extensible: true,
 	},
 	{
 		name: 'SG',
@@ -1881,8 +1855,8 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Shinobi',
 		website: 'https://shinobi.website/',
-		language: 'Shell',
 		license: 'MIT',
+		language: 'Shell',
 	},
 	{
 		name: 'Shire',
@@ -2005,7 +1979,6 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'squido',
-		license: 'MIT',
 		github: 'mrvautin/squido',
 		description:
 			'A dead simple static HTML website builder which can be hosted anywhere for super fast websites and very little effort.',
@@ -2139,8 +2112,8 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Statiq',
 		github: 'statiqdev/Statiq.Framework',
-		extensible: true,
 		is: 'static site generator',
+		extensible: true,
 	},
 	{
 		name: 'Statix',
@@ -2302,7 +2275,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'vee',
 		github: '357r4bd/vee-ARCHIVED',
-		defunct: true
+		defunct: true,
 	},
 	{
 		name: 'Vegetables',
@@ -2321,7 +2294,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'volt',
 		github: 'bow/volt',
-		license: 'BSD-3-Clause',
 	},
 	{
 		name: 'VoodooPad',
@@ -2488,17 +2460,6 @@ const rawList: RawEntry[] = [
 		website: 'https://metacpan.org/pod/Zucchini',
 		license: 'Artistic-1.0-Perl',
 		language: 'Perl',
-	},
-	{
-		name: 'Log4brains',
-		github: 'thomvaill/log4brains',
-		description:
-			'Docs-as-code knowledge base to manage Architecture Decision Records (ADR) for your project and publish them automatically as a static website.',
-		license: 'Apache-2.0',
-		language: 'JavaScript',
-		created_at: '2020-12-11T13:00:00+01:00',
-		updated_at: '2020-12-11T13:00:00+01:00',
-		is: 'static site generator',
 	},
 ]
 export default rawList

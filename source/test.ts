@@ -1,20 +1,23 @@
 /* eslint-disable no-console */
 
-import kava from 'kava'
-import fs from 'node:fs'
-import { join } from 'node:path'
-import { equal, deepEqual } from 'assert-helpers'
+import { writeFile } from 'node:fs'
+import { resolve, join } from 'node:path'
+import { spawnSync } from 'node:child_process'
 import { ok } from 'node:assert'
+
+import kava from 'kava'
+import { equal, deepEqual } from 'assert-helpers'
 import validSPDX from 'spdx-expression-validate'
 
-import rawList from './list.js' // eslint-disable-line
-import { hydrate, HydrateReturn } from './util.js' // eslint-disable-line
+import rawList from './list.js'
+import { hydrate, HydrateReturn } from './util.js'
 
 import filedirname from 'filedirname'
 const [, dir] = filedirname()
-const rawPath = join(dir, '..', 'raw.json')
-const rawSourcePath = join(dir, '..', 'source', 'list.ts')
-const hydratedPath = join(dir, '..', 'hydrated.json')
+const root = resolve(dir, '..')
+const rawPath = join(root, 'raw.json')
+const rawSourcePath = join(root, 'source', 'list.ts')
+const hydratedPath = join(root, 'hydrated.json')
 
 const fetchOptions: unknown = {
 	// timeout: 30 * 1000,
@@ -54,17 +57,22 @@ export function halt(milliseconds: number) {
  * @returns A promise that resolves to the fetch Response
  */
 export async function fetcher(url: string, init: unknown): Promise<Response> {
-	// @ts-expect-error RequestInit is not yet available to our types even though fetch is
-	const response = await fetch(url, init)
-	if (response.status === 429) {
-		// wait a minute
-		console.warn(
-			`${url} returned 429, too many requests, trying again in a minute`,
-		)
-		await halt(60 * 1000)
-		return fetcher(url, init)
+	try {
+		// @ts-expect-error RequestInit is not yet available to our types even though fetch is
+		const response = await fetch(url, init)
+		if (response.status === 429) {
+			// wait a minute
+			console.warn(
+				`${url} returned 429, too many requests, trying again in a minute`,
+			)
+			await halt(60 * 1000)
+			return fetcher(url, init)
+		}
+		return response
+	} catch (error) {
+		console.error(`Error fetching ${url}:`, error)
+		return Promise.reject(error)
 	}
-	return response
 }
 
 /**
@@ -160,7 +168,7 @@ kava.suite('static site generators list', function (suite, test) {
 		})
 
 		test(`writing corrected raw listing ${rawPath}`, function (done) {
-			fs.writeFile(
+			writeFile(
 				rawPath,
 				JSON.stringify(result.raw, null, '  '),
 				// @ts-expect-error kava isn't typed
@@ -168,12 +176,21 @@ kava.suite('static site generators list', function (suite, test) {
 			)
 		})
 
+		test(`writing hydrated listing to ${hydratedPath}`, function (done) {
+			writeFile(
+				hydratedPath,
+				JSON.stringify(result.hydrated, null, '  '),
+				// @ts-expect-error kava isn't typed
+				done,
+			)
+		})
+
 		test(`writing corrected raw source listing ${rawSourcePath}`, function (done) {
 			const rawData = JSON.stringify(result.raw, null, '  ')
-			fs.writeFile(
+			writeFile(
 				rawSourcePath,
 				[
-					`import type { RawEntry } from './types.js' // eslint-disable-line`,
+					`import type { RawEntry } from './types.js'`,
 					`const rawList: RawEntry[] = ${rawData}`,
 					`export default rawList`,
 					'',
@@ -183,13 +200,13 @@ kava.suite('static site generators list', function (suite, test) {
 			)
 		})
 
-		test(`writing hydrated listing to ${hydratedPath}`, function (done) {
-			fs.writeFile(
-				hydratedPath,
-				JSON.stringify(result.hydrated, null, '  '),
-				// @ts-expect-error kava isn't typed
-				done,
-			)
+		test(`auto-formatting our project again`, function (done) {
+			const p = spawnSync('npm', ['run', 'our:verify'], {
+				cwd: root,
+				stdio: 'inherit',
+			})
+			// @ts-expect-error kava isn't typed
+			done(p.error || null)
 		})
 
 		test('raw data was the same as the corrected data', function () {
