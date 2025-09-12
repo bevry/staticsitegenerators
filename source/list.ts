@@ -2328,6 +2328,14 @@ const rawList: RawEntry[] = [
 		defunct: true,
 	},
 	{
+		name: 'wbsx',
+		website: 'https://codeberg.org/espend/wbsx',
+		description: 'Build web sites with XSLT',
+		is: 'static site generator',
+		extensible: true,
+		license: 'MIT'
+	},
+	{
 		name: 'Weaver',
 		github: 'davidsiaw/weaver',
 		website: 'https://davidsiaw.github.io/weaver-docs/',
