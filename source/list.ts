@@ -75,6 +75,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Axiom',
 		website: 'https://forgejo.sny.sh/sun/Axiom',
+		testWebsite: false,
 		license: 'Unlicense',
 		language: 'JavaScript',
 		created_at: '2021-02-20',
