@@ -11,6 +11,7 @@ import validSPDX from 'spdx-expression-validate'
 
 import rawList from './list.js'
 import { hydrate, HydrateReturn } from './util.js'
+import { validateCredentials } from '@bevry/github-api'
 
 import filedirname from 'filedirname'
 const [, dir] = filedirname()
@@ -147,70 +148,83 @@ kava.suite('static site generators list', function (suite, test) {
 		})
 	})
 
-	suite('local render', function (suite, test) {
-		let result: HydrateReturn
+	// Only run hydration tests if GitHub credentials are available
+	let hasGithubCredentials = false
+	try {
+		validateCredentials()
+		hasGithubCredentials = true
+	} catch {
+		console.warn(
+			'Skipping local render suite: GitHub credentials not available',
+		)
+	}
 
-		test('hydrate local data', function (done) {
-			hydrate(rawList, { log, corrective: true })
-				.then(function (_result) {
-					ok(_result.raw, 'raw result was as expected')
-					ok(_result.hydrated, 'hydration result was as expected')
-					result = _result
-					done()
-				})
-				.catch(done)
-		})
+	if (hasGithubCredentials) {
+		suite('local render', function (suite, test) {
+			let result: HydrateReturn
 
-		test(`writing corrected raw listing ${rawPath}`, function (done) {
-			writeFile(
-				rawPath,
-				JSON.stringify(result.raw, null, '  '),
-				// @ts-expect-error kava isn't typed
-				done,
-			)
-		})
-
-		test(`writing hydrated listing to ${hydratedPath}`, function (done) {
-			writeFile(
-				hydratedPath,
-				JSON.stringify(result.hydrated, null, '  '),
-				// @ts-expect-error kava isn't typed
-				done,
-			)
-		})
-
-		test(`writing corrected raw source listing ${rawSourcePath}`, function (done) {
-			const rawData = JSON.stringify(result.raw, null, '  ')
-			writeFile(
-				rawSourcePath,
-				[
-					`import type { RawEntry } from './types.js'`,
-					`const rawList: RawEntry[] = ${rawData}`,
-					`export default rawList`,
-					'',
-				].join('\n'),
-				// @ts-expect-error kava isn't typed
-				done,
-			)
-		})
-
-		test(`auto-formatting our project again`, function (done) {
-			const p = spawnSync('npm', ['run', 'our:verify'], {
-				cwd: root,
-				stdio: 'inherit',
+			test('hydrate local data', function (done) {
+				hydrate(rawList, { log, corrective: true })
+					.then(function (_result) {
+						ok(_result.raw, 'raw result was as expected')
+						ok(_result.hydrated, 'hydration result was as expected')
+						result = _result
+						done()
+					})
+					.catch(done)
 			})
-			// @ts-expect-error kava isn't typed
-			done(p.error || null)
-		})
 
-		test('raw data was the same as the corrected data', function () {
-			try {
-				deepEqual(rawList, result.raw)
-			} catch {
-				console.warn(
-					'there are fields within source/list.ts that can be truncated as they are now automated, please apply the relevant changes',
+			test(`writing corrected raw listing ${rawPath}`, function (done) {
+				writeFile(
+					rawPath,
+					JSON.stringify(result.raw, null, '  '),
+					// @ts-expect-error kava isn't typed
+					done,
 				)
-			}
+			})
+
+			test(`writing hydrated listing to ${hydratedPath}`, function (done) {
+				writeFile(
+					hydratedPath,
+					JSON.stringify(result.hydrated, null, '  '),
+					// @ts-expect-error kava isn't typed
+					done,
+				)
+			})
+
+			test(`writing corrected raw source listing ${rawSourcePath}`, function (done) {
+				const rawData = JSON.stringify(result.raw, null, '  ')
+				writeFile(
+					rawSourcePath,
+					[
+						`import type { RawEntry } from './types.js'`,
+						`const rawList: RawEntry[] = ${rawData}`,
+						`export default rawList`,
+						'',
+					].join('\n'),
+					// @ts-expect-error kava isn't typed
+					done,
+				)
+			})
+
+			test(`auto-formatting our project again`, function (done) {
+				const p = spawnSync('npm', ['run', 'our:verify'], {
+					cwd: root,
+					stdio: 'inherit',
+				})
+				// @ts-expect-error kava isn't typed
+				done(p.error || null)
+			})
+
+			test('raw data was the same as the corrected data', function () {
+				try {
+					deepEqual(rawList, result.raw)
+				} catch {
+					console.warn(
+						'there are fields within source/list.ts that can be truncated as they are now automated, please apply the relevant changes',
+					)
+				}
+			})
 		})
-	})
+	}
 })
