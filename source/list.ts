@@ -1794,6 +1794,13 @@ const rawList: RawEntry[] = [
 		license: 'ISC',
 	},
 	{
+		name: 'Saga',
+		github: 'loopwerk/saga',
+		license: 'MIT',
+		description: 'A code-first static site generator in Swift. No config files, no implicit behavior, no magic conventions.',
+		language: 'Swift',
+	},
+	{
 		name: 'sblg',
 		github: 'kristapsdz/sblg',
 		website: 'https://kristaps.bsd.lv/sblg/',
