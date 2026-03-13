@@ -53,11 +53,12 @@ jobs:
       - run: npm run our:setup
       - run: npm run our:compile
       - run: npm run our:meta
-      - name: publish to npm
-        uses: bevry-actions/npm@v1.1.7
-        with:
-          npmAuthToken: ${{ secrets.NPM_AUTH_TOKEN }}
-          npmBranchTag: ':next'
+      # TODO: re-enable once NPM_AUTH_TOKEN secret is regenerated
+      # - name: publish to npm
+      #   uses: bevry-actions/npm@v1.1.7
+      #   with:
+      #     npmAuthToken: ${{ secrets.NPM_AUTH_TOKEN }}
+      #     npmBranchTag: ':next'
       - name: publish to surge
         uses: bevry-actions/surge@v1.1.0
         with:
