@@ -26,6 +26,7 @@
 <!-- DESCRIPTION/ -->
 
 A comprehensive, partially automatically generated comparison of static site generators with some minimal meta data about them
+[Inactive] - website is inactive right now and doesn't update based on changes mentioned here. It's archived.
 
 <!-- /DESCRIPTION -->
 
