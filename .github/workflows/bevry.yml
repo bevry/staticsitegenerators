@@ -16,7 +16,7 @@ jobs:
           - '22'
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Install desired Node.js version
         uses: actions/setup-node@v6
         with:
@@ -45,7 +45,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Install desired Node.js version
         uses: actions/setup-node@v6
         with:
