@@ -1241,6 +1241,16 @@ const rawList: RawEntry[] = [
 		license: 'GPL-3.0',
 	},
 	{
+		name: 'MakePages',
+		created_at: '2026-06-21T15:51:40Z',
+		github: 'Athlon1600/makepages',
+		website: 'https://makepages.dev',
+		description: 'A new, super simple static site generator written in TypeScript. Build your pages with plain HTML and Nunjucks templating engine.',
+		language: 'TypeScript',
+		license: 'MIT',
+		is: 'static site generator'
+	},
+	{
 		name: 'makesite.py',
 		github: 'sunainapai/makesite',
 		is: 'static site generator',
