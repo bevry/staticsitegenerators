@@ -440,6 +440,11 @@ const rawList: RawEntry[] = [
 		website: 'https://daux.io',
 	},
 	{
+		name: 'DD Photos',
+		github: 'dougdonohoe/ddphotos',
+		is: 'static site generator',
+	},
+	{
 		name: 'deplate',
 		github: 'tomtom/deplate',
 	},
