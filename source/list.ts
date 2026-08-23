@@ -1298,6 +1298,11 @@ const rawList: RawEntry[] = [
 		license: 'BSD-2-Clause',
 	},
 	{
+		name: 'microfolio',
+		github: 'aker-dev/microfolio',
+		is: 'static site generator',
+	},
+	{
 		name: 'Middleman',
 		github: 'middleman/middleman',
 	},
