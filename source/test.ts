@@ -21,9 +21,17 @@ const rawSourcePath = join(root, 'source', 'list.ts')
 const hydratedPath = join(root, 'hydrated.json')
 
 const fetchOptions: unknown = {
-	// timeout: 30 * 1000,
+	// a `timeout` property here would do nothing, it is a node-fetch option that
+	// the built-in fetch ignores, see `requestTimeout` for what replaced it
 	redirect: 'error',
 }
+
+/**
+ * How long a single request may run before it is aborted.
+ * Without this a host that accepts the connection then stalls holds up the
+ * entire run, as the built-in fetch has no overall deadline of its own.
+ */
+const requestTimeout = 30 * 1000
 
 /**
  * Log a message with the specified log level. Debug level messages are filtered out.
@@ -59,8 +67,11 @@ export function halt(milliseconds: number) {
  */
 export async function fetcher(url: string, init: unknown): Promise<Response> {
 	try {
-		// @ts-expect-error RequestInit is not yet available to our types even though fetch is
-		const response = await fetch(url, init)
+		const response = await fetch(url, {
+			...(init as object),
+			// a fresh signal for each attempt, as a fired one cannot be reused
+			signal: AbortSignal.timeout(requestTimeout),
+		})
 		if (response.status === 429) {
 			// wait a minute
 			console.warn(
@@ -96,13 +107,7 @@ async function checkURL(url: string) {
 	let lastError: unknown = null
 	let lastStatus: number | null = null
 	for (let attempt = 0; attempt <= retries; attempt++) {
-		if (attempt) {
-			const delay = retryDelay * 2 ** (attempt - 1)
-			console.warn(
-				`checkURL: ${url} failed, retrying in ${delay / 1000} seconds (retry ${attempt} of ${retries})`,
-			)
-			await halt(delay)
-		}
+		const started = Date.now()
 		try {
 			// use a response that caches heavily <-- no longer exists and I cannot find a backup
 			// const u = new URL('https://status.bevry.workers.dev')
@@ -115,6 +120,19 @@ async function checkURL(url: string) {
 		} catch (err) {
 			lastError = err
 			lastStatus = null
+		}
+		const seconds = ((Date.now() - started) / 1000).toFixed(1)
+		const reason = lastError ? String(lastError) : `status ${lastStatus}`
+		if (attempt === retries) {
+			console.warn(
+				`checkURL: ${url} failed after ${seconds}s (${reason}), giving up after ${retries} retries`,
+			)
+		} else {
+			const delay = retryDelay * 2 ** attempt
+			console.warn(
+				`checkURL: ${url} failed after ${seconds}s (${reason}), retrying in ${delay / 1000} seconds (retry ${attempt + 1} of ${retries})`,
+			)
+			await halt(delay)
 		}
 	}
 	if (lastError) return Promise.reject(lastError)
