@@ -1,7 +1,7 @@
 {
   "title": "Static Site Generators Listing",
   "name": "staticsitegenerators",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "license": "Unlicense",
   "description": "A comprehensive, partially automatically generated comparison of static site generators with some minimal meta data about them",
   "homepage": "https://github.com/bevry/staticsitegenerators",

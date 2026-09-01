@@ -57,7 +57,6 @@ const retryDelay = requestTimeout * 2
 /** How many times to retry a failured URL before failing tit */
 const retries = 3
 
-
 /**
  * Log a message with the specified log level. Debug level messages are filtered out.
  * @param logLevel The log level - messages with level 7 or 'debug' will be filtered out
