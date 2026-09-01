@@ -134,6 +134,11 @@ kava.suite('static site generators list', function (suite, test) {
 		})
 	})
 
+	// This suite requires every third-party repository and website in the listing
+	// to be reachable at the same moment, on every os in the matrix. A single
+	// transient outage anywhere fails the run, and because `publish` declares
+	// `needs: test`, it also blocks the deploy. Recent examples, each of which
+	// passed on the very next run: nestacms.com, hexo.io.
 	suite('uris are valid / still exist', function (suite, test) {
 		// @ts-expect-error kava isn't typed
 		this.setConfig({ concurrency: 50 }) // eslint-disable-line
