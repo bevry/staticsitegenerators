@@ -207,6 +207,8 @@ kava.suite('static site generators list', function (suite, test) {
 			const p = spawnSync('npm', ['run', 'our:verify'], {
 				cwd: root,
 				stdio: 'inherit',
+				// npm is npm.cmd on windows, which spawnSync cannot resolve without a shell
+				shell: true,
 			})
 			// @ts-expect-error kava isn't typed
 			done(p.error || null)
