@@ -63,13 +63,15 @@ export async function fetcher(url: string, init: unknown): Promise<Response> {
 		if (response.status === 429) {
 			// wait a minute
 			console.warn(
-				`${url} returned 429, too many requests, trying again in a minute`,
+				`${url} returned 429, too many requests, trying again in 30 minutes`,
 			)
-			await halt(60 * 1000)
+			await halt(1000 * 60 * 30)
 			return fetcher(url, init)
 		}
 		return response
 	} catch (error) {
+		// GitHub will be hitting rate limits, which we must wait for.
+		// If it is due to a website bot protection, then add `testWebsite: false` to its listing.
 		console.error(`Error fetching ${url}:`, error)
 		return Promise.reject(error)
 	}
