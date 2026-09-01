@@ -203,6 +203,20 @@ kava.suite('static site generators list', function (suite, test) {
 	})
 
 	suite('local render', function (suite, test) {
+		// Hydrating the listing costs 430 api requests, so running it on every os in
+		// the matrix costs 1290 a run against an hourly budget shared by every job
+		// and every run in the repository. Five runs in half an hour exhausted it
+		// and returned `API rate limit exceeded for installation`. The result is
+		// identical on every platform and only the publish job consumes it, so
+		// within ci this runs on linux alone, cutting a run to 430. Run locally, on
+		// any platform, it always runs.
+		if (process.env.CI && process.platform !== 'linux') {
+			console.warn(
+				`skipping local render on ${process.platform}, in ci it runs on linux alone to stay within the github api rate limit`,
+			)
+			return
+		}
+
 		let result: HydrateReturn
 
 		test('hydrate local data', function (done) {
