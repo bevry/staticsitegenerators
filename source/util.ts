@@ -53,7 +53,7 @@ export interface HydrateOptions {
 	/** Cache duration in milliseconds */
 	cache?: number
 	/** Logging function that accepts a log level and arguments */
-	log?: (logLevel: string, ...args: unknown[]) => void // eslint-disable-line
+	log?: (logLevel: string, ...args: unknown[]) => void  
 }
 
 /** The result of the hydrate operation containing both raw and hydrated data */
@@ -78,8 +78,8 @@ export async function hydrate(
 	if (opts.corrective == null) opts.corrective = false
 	if (opts.cache == null) opts.cache = 1000 * 60 * 60 * 24 // one day
 
-	const rawMap: { [id: string]: RawEntry } = {}
-	const hydratedMap: { [id: string]: HydratedEntry } = {}
+	const rawMap: Record<string, RawEntry> = {}
+	const hydratedMap: Record<string, HydratedEntry> = {}
 	const githubRepos: string[] = []
 	data.forEach(function (entry, index) {
 		delete entry.id

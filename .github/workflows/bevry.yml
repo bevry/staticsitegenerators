@@ -25,7 +25,6 @@ jobs:
           --version && node -e 'console.log(process.versions)'
       - run: npm run our:setup
       - run: npm run our:compile
-      - run: npm run our:verify
       - name: Install targeted Node.js
         if: ${{ matrix.node != 22 }}
         uses: actions/setup-node@v7
@@ -38,6 +37,7 @@ jobs:
       - run: npm test
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - run: npm run our:verify # comes after `npm test`, as `npm test` generated the `hydrated.json` and `raw.json`
   publish:
     if: ${{ github.event_name == 'push' }}
     needs: test

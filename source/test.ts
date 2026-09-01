@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/prefer-promise-reject-errors */
 
 import { writeFile } from 'node:fs'
 import { resolve, join } from 'node:path'
@@ -66,7 +67,7 @@ export async function fetcher(url: string, init: unknown): Promise<Response> {
 				`${url} returned 429, too many requests, trying again in 30 minutes`,
 			)
 			await halt(1000 * 60 * 30)
-			return fetcher(url, init)
+			return await fetcher(url, init)
 		}
 		return response
 	} catch (error) {
@@ -135,20 +136,20 @@ kava.suite('static site generators list', function (suite, test) {
 
 	suite('uris are valid / still exist', function (suite, test) {
 		// @ts-expect-error kava isn't typed
-		this.setConfig({ concurrency: 50 })
+		this.setConfig({ concurrency: 50 }) // eslint-disable-line
 		rawList.forEach(function ({ name, github, website, testWebsite }) {
 			if (github) {
-				github = `https://github.com/${github}`
-				test(`${name}: http get github: ${github}`, function (done) {
-					checkURL(github as string)
-						.then(() => done())
+				const githubUrl = `https://github.com/${github}`
+				test(`${name}: http get github: ${githubUrl}`, function (done) {
+					checkURL(githubUrl)
+						.then(() => { done(); })
 						.catch(done)
 				})
 			}
 			if (website && testWebsite !== false) {
 				test(`${name}: http get website: ${website}`, function (done) {
 					checkURL(website)
-						.then(() => done())
+						.then(() => { done(); })
 						.catch(done)
 				})
 			}
