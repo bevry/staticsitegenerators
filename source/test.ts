@@ -232,10 +232,25 @@ kava.suite('static site generators list', function (suite, test) {
 	})
 
 	suite('local render', function (suite, test) {
+		// Enriching the listing costs one github api request per repository, which
+		// on every os in the matrix triples the spend against an hourly budget that
+		// is shared by every job and every run in the repository. The enriched result
+		// is identical on every platform, so within ci only linux fetches it. Run
+		// locally it always fetches, whatever the platform.
+		//
+		// The suite itself still runs everywhere, because it writes raw.json and
+		// hydrated.json, which `source/index.ts` imports and `our:verify` resolves.
+		const github = !process.env.CI || process.platform === 'linux'
+		if (!github) {
+			console.warn(
+				`skipping github enrichment on ${process.platform}, in ci only linux fetches it to stay within the api rate limit`,
+			)
+		}
+
 		let result: HydrateReturn
 
 		test('hydrate local data', function (done) {
-			hydrate(rawList, { log, corrective: true })
+			hydrate(rawList, { log, corrective: true, github })
 				.then(function (_result) {
 					ok(_result.raw, 'raw result was as expected')
 					ok(_result.hydrated, 'hydration result was as expected')
