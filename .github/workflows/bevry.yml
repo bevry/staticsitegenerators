@@ -36,6 +36,8 @@ jobs:
           printf '%s' 'node: ' && node --version && printf '%s' 'npm: ' && npm
           --version && node -e 'console.log(process.versions)'
       - run: npm test
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
   publish:
     if: ${{ github.event_name == 'push' }}
     needs: test
