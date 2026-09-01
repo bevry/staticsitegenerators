@@ -75,12 +75,12 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Axiom',
 		website: 'https://forgejo.sny.sh/sun/Axiom',
-		testWebsite: false,
 		license: 'Unlicense',
 		language: 'JavaScript',
 		created_at: '2021-02-20',
 		updated_at: '2023-04-29',
 		is: 'static site generator',
+		testWebsite: false,
 		defunct: true,
 	},
 	{
@@ -225,7 +225,7 @@ const rawList: RawEntry[] = [
 			'Blosxom (pronounced blossom) is a lightweight yet feature-packed weblog application designed from the ground up with simplicity, usability, and interoperability in mind.',
 		created_at: '2002-02-28T00:00:00Z',
 		defunct: true,
-		testWebsite: false
+		testWebsite: false,
 	},
 	{
 		name: 'Blug',
@@ -271,6 +271,11 @@ const rawList: RawEntry[] = [
 		website: 'https://metacpan.org/pod/Bryar::Frontend::Static',
 		license: 'Artistic-1.0-Perl',
 		language: 'Perl',
+	},
+	{
+		name: 'Build Awesome (Eleventy)',
+		github: '11ty/buildawesome',
+		is: 'static site generator',
 	},
 	{
 		name: 'Bunto',
@@ -537,11 +542,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'electro',
 		github: 'caldwell/electro',
-	},
-	{
-		name: 'Build Awesome (Eleventy)',
-		github: '11ty/buildawesome',
-		is: 'static site generator',
 	},
 	{
 		name: 'embellih',
@@ -1066,7 +1066,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'kalastatic',
 		github: 'kalamuna/kalastatic',
-		license: 'MIT',
 	},
 	{
 		name: 'Kel',
@@ -1342,6 +1341,7 @@ const rawList: RawEntry[] = [
 		website: 'https://nanoblogger.sourceforge.net',
 		license: 'GPL-3.0',
 		language: 'Shell',
+		testWebsite: false,
 	},
 	{
 		name: 'Nanoc',
@@ -1539,10 +1539,11 @@ const rawList: RawEntry[] = [
 		name: 'PHPetite',
 		website: 'https://git.sr.ht/~bt/phpetite',
 		license: 'GPL-3.0',
-		language: "PHP",
-		description: "PHPetite (/p/h/pəˈtēt/) is a single file, static blog generated from PHP",
+		language: 'PHP',
+		description:
+			'PHPetite (/p/h/pəˈtēt/) is a single file, static blog generated from PHP',
+		created_at: '2021-02-05T17:43:04Z',
 		is: 'static site generator',
-		created_at: "2021-02-05T17:43:04Z",
 	},
 	{
 		name: 'PieCrust',
@@ -1783,9 +1784,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Saga',
 		github: 'loopwerk/saga',
-		license: 'MIT',
-		description: 'A code-first static site generator in Swift. No config files, no implicit behavior, no magic conventions.',
-		language: 'Swift',
 	},
 	{
 		name: 'sblg',

@@ -142,14 +142,18 @@ kava.suite('static site generators list', function (suite, test) {
 				const githubUrl = `https://github.com/${github}`
 				test(`${name}: http get github: ${githubUrl}`, function (done) {
 					checkURL(githubUrl)
-						.then(() => { done(); })
+						.then(() => {
+							done()
+						})
 						.catch(done)
 				})
 			}
 			if (website && testWebsite !== false) {
 				test(`${name}: http get website: ${website}`, function (done) {
 					checkURL(website)
-						.then(() => { done(); })
+						.then(() => {
+							done()
+						})
 						.catch(done)
 				})
 			}

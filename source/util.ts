@@ -3,7 +3,11 @@
 // Imports
 import { RawEntry, HydratedEntry } from './types.js'
 import naturalCompare from 'string-natural-compare'
-import { validateCredentials, getGitHubRepositories } from '@bevry/github-api'
+import {
+	validateCredentials,
+	getGitHubRepositories,
+	PromisePool,
+} from '@bevry/github-api'
 import arrangeKeys from 'arrangekeys'
 import crypto from 'node:crypto'
 
@@ -53,7 +57,7 @@ export interface HydrateOptions {
 	/** Cache duration in milliseconds */
 	cache?: number
 	/** Logging function that accepts a log level and arguments */
-	log?: (logLevel: string, ...args: unknown[]) => void  
+	log?: (logLevel: string, ...args: unknown[]) => void
 }
 
 /** The result of the hydrate operation containing both raw and hydrated data */
@@ -114,7 +118,21 @@ export async function hydrate(
 	}
 
 	// Enhance with github data
-	const repos = await getGitHubRepositories(githubRepos)
+	const repos = await getGitHubRepositories(githubRepos, {
+		// Pass a single shared PromisePool to limit concurrent requests.
+		//
+		// Limited to 100 as that is the GitHub API concurrency limit:
+		// > Make too many concurrent requests. No more than 100 concurrent requests are allowed. This limit is shared across the REST API and GraphQL API.
+		// > https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2026-03-10#about-secondary-rate-limits
+		//
+		// Note that the `concurrency` option cannot be used for this. queryREST does
+		// `opts.pool ??= new PromisePool(opts.concurrency)`, but getGitHubRepository
+		// calls it as `queryREST({ ...opts, pathname })`, so the assignment lands on a
+		// fresh spread of the options for every request. Each request therefore builds
+		// its own pool and nothing limits the batch. Passing an already constructed
+		// pool works because the same instance is threaded through untouched.
+		pool: new PromisePool(100),
+	})
 	for (const github of repos) {
 		// Prepare
 		const key = github.full_name.toLowerCase()
