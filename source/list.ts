@@ -426,10 +426,6 @@ const rawList: RawEntry[] = [
 		is: 'static site generator',
 	},
 	{
-		name: 'cytoplasm',
-		github: 'startling/cytoplasm',
-	},
-	{
 		name: 'Dapper',
 		github: 'markdbenson/dapper',
 		license: 'MIT',
