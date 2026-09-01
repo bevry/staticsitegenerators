@@ -2,6 +2,11 @@
 
 [See the git commit history for changes relating to the listing](https://github.com/bevry/staticsitegenerators/commits/master)
 
+## v4.0.2 2026 September 2
+
+- Fixed published package missing `raw.json` and `hydrated.json`
+- Thank you to the sponsors: [Andrew Nesbitt](https://nesbitt.io), [Poonacha Medappa](https://poonachamedappa.com), [Roboflow](https://roboflow.com), [StackBlitz](https://stackblitz.com)
+
 ## v4.0.1 2026 September 2
 
 - Fixed rate limit when hitting the GitHub API; request concurrency now set to the 100 limit. If you need this customisable, let us know.
