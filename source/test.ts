@@ -78,28 +78,51 @@ export async function fetcher(url: string, init: unknown): Promise<Response> {
 	}
 }
 
+/** How many times to try a url again after the first attempt fails. */
+const retries = 3
+
+/** How long to wait before the first retry, doubling for each one after. */
+const retryDelay = 2000
+
 /**
  * Check if a URL is accessible by making a HEAD request through a status checking service.
+ * Transient outages are common across the many third-party sites in the listing, so a
+ * failure is retried {@link retries} times, waiting 2, 4, then 8 seconds. Rate limiting
+ * is not handled here, {@link fetcher} deals with that.
  * @param url The URL to check for accessibility
  * @returns A promise that resolves if the URL is accessible, rejects if not
  */
 async function checkURL(url: string) {
-	try {
-		// use a response that caches heavily <-- no longer exists and I cannot find a backup
-		// const u = new URL('https://status.bevry.workers.dev')
-		// u.searchParams.set('url', url)
-		// const res = await fetcher(u.toString(), fetchOptions)
-		const res = await fetcher(url, fetchOptions)
-		if (!res.ok) {
-			equal(
-				res.status,
-				200,
-				`checkURL: response http status code should be 200 success on ${url}`,
+	let lastError: unknown = null
+	let lastStatus: number | null = null
+	for (let attempt = 0; attempt <= retries; attempt++) {
+		if (attempt) {
+			const delay = retryDelay * 2 ** (attempt - 1)
+			console.warn(
+				`checkURL: ${url} failed, retrying in ${delay / 1000} seconds (retry ${attempt} of ${retries})`,
 			)
+			await halt(delay)
 		}
-	} catch (err) {
-		return Promise.reject(err)
+		try {
+			// use a response that caches heavily <-- no longer exists and I cannot find a backup
+			// const u = new URL('https://status.bevry.workers.dev')
+			// u.searchParams.set('url', url)
+			// const res = await fetcher(u.toString(), fetchOptions)
+			const res = await fetcher(url, fetchOptions)
+			if (res.ok) return
+			lastError = null
+			lastStatus = res.status
+		} catch (err) {
+			lastError = err
+			lastStatus = null
+		}
 	}
+	if (lastError) return Promise.reject(lastError)
+	equal(
+		lastStatus,
+		200,
+		`checkURL: response http status code should be 200 success on ${url}`,
+	)
 }
 
 kava.suite('static site generators list', function (suite, test) {
@@ -135,10 +158,10 @@ kava.suite('static site generators list', function (suite, test) {
 	})
 
 	// This suite requires every third-party repository and website in the listing
-	// to be reachable at the same moment, on every os in the matrix. A single
-	// transient outage anywhere fails the run, and because `publish` declares
-	// `needs: test`, it also blocks the deploy. Recent examples, each of which
-	// passed on the very next run: nestacms.com, hexo.io.
+	// to be reachable, on every os in the matrix, and because `publish` declares
+	// `needs: test`, an outage anywhere also blocks the deploy. Three runs in a
+	// row failed on a different site that was not actually down: nestacms.com,
+	// hexo.io, psyke.org. `checkURL` now retries to absorb that.
 	suite('uris are valid / still exist', function (suite, test) {
 		// @ts-expect-error kava isn't typed
 		this.setConfig({ concurrency: 50 }) // eslint-disable-line
