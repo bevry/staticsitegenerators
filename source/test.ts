@@ -50,33 +50,23 @@ export function halt(milliseconds: number) {
 	})
 }
 
-/** How many times to retry a URL that responds with 429, before giving up. */
-const retries = 3
-
 /**
  * Fetch a URL with automatic retry on 429 (rate limit) responses.
- * Gives up after {@link retries} attempts and returns the 429 response, as some
- * hosts rate limit CI runners indefinitely, which would otherwise retry forever.
  * @param url The URL to fetch
  * @param init The fetch options and configuration object for the request
- * @param attempt Which attempt this is, starting at 1
  * @returns A promise that resolves to the fetch Response
  */
-export async function fetcher(
-	url: string,
-	init: unknown,
-	attempt: number = 1,
-): Promise<Response> {
+export async function fetcher(url: string, init: unknown): Promise<Response> {
 	try {
 		// @ts-expect-error RequestInit is not yet available to our types even though fetch is
 		const response = await fetch(url, init)
-		if (response.status === 429 && attempt < retries) {
+		if (response.status === 429) {
 			// wait a minute
 			console.warn(
-				`${url} returned 429, too many requests, trying again in a minute (attempt ${attempt} of ${retries})`,
+				`${url} returned 429, too many requests, trying again in a minute`,
 			)
 			await halt(60 * 1000)
-			return fetcher(url, init, attempt + 1)
+			return fetcher(url, init)
 		}
 		return response
 	} catch (error) {
