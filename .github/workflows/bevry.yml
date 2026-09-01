@@ -34,10 +34,21 @@ jobs:
         run: >-
           printf '%s' 'node: ' && node --version && printf '%s' 'npm: ' && npm
           --version && node -e 'console.log(process.versions)'
+      # `npm test` generates our `raw.json` and `hydrated.json` artifacts
       - run: npm test
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - run: npm run our:verify # comes after `npm test`, as `npm test` generated the `hydrated.json` and `raw.json`
+      # upload those artifacts for the publish job to consume
+      - name: Upload generated artifacts for publish consumption
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: json-artifacts
+          path: |
+            raw.json
+            hydrated.json
+      # now that those files exist, verification will pass as they can now be imported/verified by our project/linters
+      - run: npm run our:verify
   publish:
     if: ${{ github.event_name == 'push' }}
     needs: test
@@ -52,6 +63,10 @@ jobs:
         run: >-
           printf '%s' 'node: ' && node --version && printf '%s' 'npm: ' && npm
           --version && node -e 'console.log(process.versions)'
+      - name: Download generated artifacts from test job
+        uses: actions/download-artifact@v4
+        with:
+          name: json-artifacts
       - run: npm run our:setup
       - run: npm run our:compile
       - run: npm run our:meta
