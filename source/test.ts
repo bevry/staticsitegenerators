@@ -203,24 +203,25 @@ kava.suite('static site generators list', function (suite, test) {
 	})
 
 	suite('local render', function (suite, test) {
-		// Hydrating the listing costs 430 api requests, so running it on every os in
-		// the matrix costs 1290 a run against an hourly budget shared by every job
-		// and every run in the repository. Five runs in half an hour exhausted it
-		// and returned `API rate limit exceeded for installation`. The result is
-		// identical on every platform and only the publish job consumes it, so
-		// within ci this runs on linux alone, cutting a run to 430. Run locally, on
-		// any platform, it always runs.
-		if (process.env.CI && process.platform !== 'linux') {
+		// Enriching the listing costs 430 github api requests, so doing it on every
+		// os in the matrix costs 1290 a run against an hourly budget shared by every
+		// job and every run in the repository. Five runs in half an hour exhausted
+		// it and returned `API rate limit exceeded for installation`. The enriched
+		// result is identical on every platform, so within ci only linux fetches it,
+		// cutting a run to 430. Run locally it always fetches, whatever the platform.
+		// The suite still runs everywhere regardless, because it writes raw.json and
+		// hydrated.json, which `source/index.ts` imports and `our:verify` resolves.
+		const github = !process.env.CI || process.platform === 'linux'
+		if (!github) {
 			console.warn(
-				`skipping local render on ${process.platform}, in ci it runs on linux alone to stay within the github api rate limit`,
+				`skipping github enrichment on ${process.platform}, in ci only linux fetches it to stay within the api rate limit`,
 			)
-			return
 		}
 
 		let result: HydrateReturn
 
 		test('hydrate local data', function (done) {
-			hydrate(rawList, { log, corrective: true })
+			hydrate(rawList, { log, corrective: true, github })
 				.then(function (_result) {
 					ok(_result.raw, 'raw result was as expected')
 					ok(_result.hydrated, 'hydration result was as expected')

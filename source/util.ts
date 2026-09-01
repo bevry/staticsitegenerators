@@ -60,6 +60,8 @@ export interface HydrateOptions {
 	log?: (logLevel: string, ...args: unknown[]) => void
 	/** How many GitHub API requests to have in flight at once */
 	concurrency?: number
+	/** Whether to enrich the entries with GitHub API data, defaults to true */
+	github?: boolean
 }
 
 /** The result of the hydrate operation containing both raw and hydrated data */
@@ -126,9 +128,12 @@ export async function hydrate(
 	// fresh spread of the options for every request, so `concurrency` alone gives
 	// each request its own pool and never limits the batch. GitHub responds to
 	// hundreds of simultaneous requests with a secondary rate limit.
-	const repos = await getGitHubRepositories(githubRepos, {
-		pool: new PromisePool(opts.concurrency),
-	})
+	const repos =
+		opts.github === false
+			? []
+			: await getGitHubRepositories(githubRepos, {
+					pool: new PromisePool(opts.concurrency),
+				})
 	for (const github of repos) {
 		// Prepare
 		const key = github.full_name.toLowerCase()
