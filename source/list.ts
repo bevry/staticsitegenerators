@@ -225,6 +225,7 @@ const rawList: RawEntry[] = [
 			'Blosxom (pronounced blossom) is a lightweight yet feature-packed weblog application designed from the ground up with simplicity, usability, and interoperability in mind.',
 		created_at: '2002-02-28T00:00:00Z',
 		defunct: true,
+		testWebsite: false
 	},
 	{
 		name: 'Blug',
@@ -397,6 +398,7 @@ const rawList: RawEntry[] = [
 		description:
 			'Contentful is a content management developer platform with an API at its core.',
 		is: 'static site editor',
+		testWebsite: false,
 	},
 	{
 		name: 'Cory',
@@ -412,16 +414,8 @@ const rawList: RawEntry[] = [
 		license: 'MIT',
 	},
 	{
-		name: 'Curvenote',
-		github: 'curvenote/curvenote',
-		website: 'https://curvenote.com/demos/publish-from-github',
-		license: 'MIT',
-		description: 'Generate websites from Markdown and Jupyter Notebooks',
-		is: 'static site generator',
-	},
-	{
 		name: 'cyrax',
-		github: 'piranha/cyrax',
+		github: 'sansolovyov/cyrax',
 		website: 'https://pypi.org/project/cyrax/',
 		is: 'static site generator',
 	},
@@ -545,8 +539,8 @@ const rawList: RawEntry[] = [
 		github: 'caldwell/electro',
 	},
 	{
-		name: 'Eleventy',
-		github: '11ty/eleventy',
+		name: 'Build Awesome (Eleventy)',
+		github: '11ty/buildawesome',
 		is: 'static site generator',
 	},
 	{
@@ -730,7 +724,7 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'gostatic',
-		github: 'piranha/gostatic',
+		github: 'sansolovyov/gostatic',
 	},
 	{
 		name: 'Grain',
@@ -748,7 +742,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Grav Administration Panel',
 		github: 'getgrav/grav-plugin-admin',
-		website: 'https://learn.getgrav.org/15/admin-panel/introduction',
+		website: 'https://learn.getgrav.org/17/admin-panel/introduction',
 		is: 'static site editor',
 	},
 	{
@@ -916,11 +910,6 @@ const rawList: RawEntry[] = [
 		website: 'http://thoughtbot.github.io/high_voltage/',
 	},
 	{
-		name: 'HSC',
-		github: 'mbethke/hsc',
-		created_at: '1998-09-21',
-	},
-	{
 		name: 'htmd',
 		github: 'Siecje/htmd',
 		created_at: '2015-01-31',
@@ -966,10 +955,6 @@ const rawList: RawEntry[] = [
 		description:
 			'Lightweight and turnkey static site/blog generator for developers',
 		is: 'static site generator',
-	},
-	{
-		name: 'igor',
-		github: 'aconbere/igor',
 	},
 	{
 		name: 'Ikiwiki',
@@ -1026,7 +1011,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Jekyll Now',
 		github: 'barryclark/jekyll-now',
-		website: 'https://www.jekyllnow.com',
 	},
 	{
 		name: 'Jekytrum',
@@ -1362,7 +1346,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Nanoc',
 		github: 'nanoc/nanoc',
-		website: 'https://nanoc.app',
 		created_at: '2007-05-03T00:00:00Z',
 	},
 	{
@@ -1864,12 +1847,6 @@ const rawList: RawEntry[] = [
 		github: 'rubyworks/shelob',
 	},
 	{
-		name: 'Shinobi',
-		website: 'https://shinobi.website/',
-		license: 'MIT',
-		language: 'Shell',
-	},
-	{
 		name: 'Shire',
 		github: 'sangupta/shire',
 		license: 'Apache-2.0',
@@ -2294,10 +2271,6 @@ const rawList: RawEntry[] = [
 		github: 'semk/voldemort',
 	},
 	{
-		name: 'volt',
-		github: 'bow/volt',
-	},
-	{
 		name: 'VoodooPad',
 		website: 'https://www.voodoopad.com/',
 		license: false,
@@ -2421,10 +2394,6 @@ const rawList: RawEntry[] = [
 		updated_at: '2003-10-19T00:00:00.000Z',
 	},
 	{
-		name: 'Yozuch',
-		github: 'akrylysov/yozuch',
-	},
-	{
 		name: 'yst',
 		github: 'jgm/yst',
 	},
@@ -2435,7 +2404,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'ZenWeb',
 		github: 'seattlerb/zenweb',
-		website: 'https://www.zenspider.com/projects/zenweb.html',
+		website: 'https://zenspider.com/projects/zenweb.html',
 		license: 'MIT',
 	},
 	{
