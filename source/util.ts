@@ -3,7 +3,11 @@
 // Imports
 import { RawEntry, HydratedEntry } from './types.js'
 import naturalCompare from 'string-natural-compare'
-import { validateCredentials, getGitHubRepositories } from '@bevry/github-api'
+import {
+	validateCredentials,
+	getGitHubRepositories,
+	PromisePool,
+} from '@bevry/github-api'
 import arrangeKeys from 'arrangekeys'
 import crypto from 'node:crypto'
 
@@ -53,7 +57,9 @@ export interface HydrateOptions {
 	/** Cache duration in milliseconds */
 	cache?: number
 	/** Logging function that accepts a log level and arguments */
-	log?: (logLevel: string, ...args: unknown[]) => void  
+	log?: (logLevel: string, ...args: unknown[]) => void
+	/** How many GitHub API requests to have in flight at once */
+	concurrency?: number
 }
 
 /** The result of the hydrate operation containing both raw and hydrated data */
@@ -67,7 +73,7 @@ export interface HydrateReturn {
 /**
  * Trim redundant data from the listing and enhance with GitHub API data.
  * @param data An array of raw entries to hydrate with GitHub metadata
- * @param opts Configuration options for the hydration process including corrective mode, cache duration, and logging function
+ * @param opts Configuration options for the hydration process including corrective mode, cache duration, request concurrency, and logging function
  * @returns A promise resolving to both raw and hydrated entry arrays
  */
 export async function hydrate(
@@ -77,6 +83,7 @@ export async function hydrate(
 	validateCredentials()
 	if (opts.corrective == null) opts.corrective = false
 	if (opts.cache == null) opts.cache = 1000 * 60 * 60 * 24 // one day
+	if (opts.concurrency == null) opts.concurrency = 10
 
 	const rawMap: Record<string, RawEntry> = {}
 	const hydratedMap: Record<string, HydratedEntry> = {}
@@ -114,7 +121,14 @@ export async function hydrate(
 	}
 
 	// Enhance with github data
-	const repos = await getGitHubRepositories(githubRepos)
+	// Pass a single shared pool, rather than the `concurrency` option, as
+	// `queryREST` applies `opts.pool ??= new PromisePool(opts.concurrency)` to a
+	// fresh spread of the options for every request, so `concurrency` alone gives
+	// each request its own pool and never limits the batch. GitHub responds to
+	// hundreds of simultaneous requests with a secondary rate limit.
+	const repos = await getGitHubRepositories(githubRepos, {
+		pool: new PromisePool(opts.concurrency),
+	})
 	for (const github of repos) {
 		// Prepare
 		const key = github.full_name.toLowerCase()
