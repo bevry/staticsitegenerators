@@ -21,7 +21,7 @@ const hydratedPath = join(root, 'hydrated.json')
 
 const fetchOptions: unknown = {
 	// timeout: 30 * 1000,
-	redirect: 'follow',
+	redirect: 'error',
 }
 
 /**
@@ -82,14 +82,20 @@ export async function fetcher(url: string, init: unknown): Promise<Response> {
  */
 async function checkURL(url: string) {
 	try {
+		// use a response that caches heavily <-- no longer exists and I cannot find a backup
+		// const u = new URL('https://status.bevry.workers.dev')
+		// u.searchParams.set('url', url)
+		// const res = await fetcher(u.toString(), fetchOptions)
 		const res = await fetcher(url, fetchOptions)
 		if (!res.ok) {
-			console.warn(
-				`checkURL: ${url} returned status ${res.status} (expected 200)`,
+			equal(
+				res.status,
+				200,
+				`checkURL: response http status code should be 200 success on ${url}`,
 			)
 		}
 	} catch (err) {
-		console.warn(`checkURL: ${url} failed: ${err}`)
+		return Promise.reject(err)
 	}
 }
 
