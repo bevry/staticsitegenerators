@@ -1336,12 +1336,6 @@ const rawList: RawEntry[] = [
 		github: 'clehner/mksite',
 	},
 	{
-		name: 'mkws',
-		website: 'https://mkws.sh',
-		description:
-			'A simple static site generator using sh as a template language',
-	},
-	{
 		name: 'monkeyman',
 		github: 'wspringer/monkeyman',
 	},
@@ -1560,8 +1554,12 @@ const rawList: RawEntry[] = [
 	},
 	{
 		name: 'PHPetite',
-		github: 'bradleytaunt/phpetite',
-		website: 'https://phpetite.org/',
+		website: 'https://git.sr.ht/~bt/phpetite',
+		license: 'GPL-3.0',
+		language: "PHP",
+		description: "PHPetite (/p/h/pəˈtēt/) is a single file, static blog generated from PHP",
+		is: 'static site generator',
+		created_at: "2021-02-05T17:43:04Z",
 	},
 	{
 		name: 'PieCrust',
@@ -1606,7 +1604,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'portable-php',
 		github: 'cadars/portable-php',
-		website: 'https://portable.fyi',
 		language: 'PHP',
 	},
 	{
@@ -2021,14 +2018,6 @@ const rawList: RawEntry[] = [
 		github: 'wiztools/stagen',
 	},
 	{
-		name: 'Stapy',
-		website: 'https://www.stapy.net/',
-		license: 'BSD-2-Clause',
-		language: 'Python',
-		description:
-			'A Static Site Generator that can generate a Website without a command line.',
-	},
-	{
 		name: 'Stasis',
 		github: 'winton/stasis',
 	},
@@ -2202,7 +2191,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Tapestry',
 		github: 'tapestry-cloud/tapestry',
-		website: 'https://www.tapestry.cloud',
 		is: 'static site generator',
 		extensible: true,
 	},
