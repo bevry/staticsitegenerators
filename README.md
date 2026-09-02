@@ -115,9 +115,7 @@ console.log(listing.raw)
 #### Maintainers
 
 -   [Benjamin Lupton](https://balupton.com) — Accelerating collaborative wisdom.
--   [Craig Davison](https://davison.io)
 -   [Cthulhux](https://code.rosaelefanten.org) — Creator of weird utilities, knower of things. Hates Git.
--   [Manvel Saroyan](https://manvel.me) — Currently @bardeenai, @Privacy-Managers, @cmints and @browser-automation, previously @adblockplus.
 
 #### Contributors
 
