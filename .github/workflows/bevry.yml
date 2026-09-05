@@ -41,7 +41,7 @@ jobs:
       # upload those artifacts for the publish job to consume
       - name: Upload generated artifacts for publish consumption
         if: ${{ matrix.os == 'ubuntu-latest' }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: json-artifacts
           path: |
