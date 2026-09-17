@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/prefer-promise-reject-errors */
 
 import { writeFile } from 'node:fs'
 import { resolve, join } from 'node:path'
@@ -22,14 +21,15 @@ const hydratedPath = join(root, 'hydrated.json')
 
 const oneSecond = 1000
 const thirtySeconds = oneSecond * 30
-const oneMinute = oneSecond * 60
 
 /** This should be adapted based on what we learn on what a platform supports before it hits issues. */
 const requestConcurrency = 30
 
 /**
- * How long until a timeout of a request occurs?
- * Without this a host that accepts the connection this then stalls the suite concurrency, as the built-in fetch has no overall deadline of its own.
+ * How long until our overall request deadline fires, via `AbortSignal.timeout`, covering every phase of the fetch: connection, request, response headers, and body.
+ * Without this a host that accepts the connection and then stalls, which stalls the suite concurrency, as the built-in fetch has no overall deadline of its own.
+ *
+ * Timeouts can also occur earlier within the connection phase itself, which have their own much shorter timeouts (e.g. Node's ~250ms per-address connect timeout when a host resolves to multiple addresses), surfacing as `ETIMEDOUT` / `UND_ERR_CONNECT_TIMEOUT` well before this deadline — see `isRequestTimeout` and `isRequestConnectTimeout` for how the two are told apart.
  */
 const requestTimeout = thirtySeconds
 
@@ -43,12 +43,18 @@ const requestRetryDelay = requestTimeout * 2
 /** How many times to retry a failed URL before failing tit */
 const retries = 3
 
-/** Convert milliseconds into human seconds */
+/**
+ * Convert milliseconds into human seconds
+ * @param milliseconds
+ */
 function toHumanSeconds(milliseconds: number) {
 	return `${Number(milliseconds / 1000).toFixed(1)} seconds`
 }
 
-/** Convert a milliseconds delta into human time */
+/**
+ * Convert a milliseconds delta into human time
+ * @param milliseconds
+ */
 function toDeltaTime(milliseconds: number) {
 	return new Date(Date.now() + milliseconds).toLocaleTimeString()
 }
@@ -79,7 +85,10 @@ export function halt(milliseconds: number) {
 	})
 }
 
-/** Output log segments with consistent separator */
+/**
+ * Output log segments with consistent separator
+ * @param segments
+ */
 function joinLogSegments(...segments: string[]) {
 	return segments.filter((i) => String(i).length !== 0).join(' | ')
 }
