@@ -685,6 +685,7 @@ const rawList: RawEntry[] = [
 		description:
 			'Websites for you and your projects, hosted directly from your GitHub repository. Just edit, push, and your changes are live.',
 		is: 'static site host',
+		testWebsite: false,
 	},
 	{
 		name: 'GitLab Pages',
@@ -860,7 +861,6 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Harp',
 		github: 'sintaxi/harp',
-		website: 'http://harpjs.com/',
 		license: 'MIT',
 	},
 	{
@@ -965,6 +965,7 @@ const rawList: RawEntry[] = [
 			'Ikiwiki is a wiki compiler. It converts wiki pages into HTML pages suitable for publishing on a website.',
 		created_at: '2006-03-10',
 		updated_at: '2022-05-30',
+		testWebsite: false,
 	},
 	{
 		name: 'ink',
@@ -1081,6 +1082,7 @@ const rawList: RawEntry[] = [
 		github: 'getkirby/starterkit',
 		website: 'https://getkirby.com/',
 		license: false,
+		testWebsite: false,
 	},
 	{
 		name: 'kkr',
@@ -1485,6 +1487,7 @@ const rawList: RawEntry[] = [
 		name: 'Pagegen',
 		github: 'oliverfields/pagegen',
 		website: 'https://pagegen.phnd.net',
+		testWebsite: false,
 	},
 	{
 		name: 'Pagen',
@@ -1720,6 +1723,8 @@ const rawList: RawEntry[] = [
 		name: 'Really Static',
 		github: 'trajano/really-static',
 		website: 'https://wordpress.org/plugins/really-static/',
+		defunct: true,
+		testWebsite: false,
 	},
 	{
 		name: 'Refrain',
