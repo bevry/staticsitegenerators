@@ -418,6 +418,7 @@
     "valid-module": "^2.6.0"
   },
   "scripts": {
+    "my:test": "npm test && npm run our:verify",
     "our:clean": "rm -rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
     "our:compile": "npm run our:compile:edition-browsers && npm run our:compile:edition-es2023-esm && npm run our:compile:edition-types",
     "our:compile:edition-browsers": "tsc --module esnext --target es2024 --outDir ./edition-browsers --project tsconfig.json && ( test ! -d edition-browsers/source || ( mv edition-browsers/source edition-temp && rm -rf edition-browsers && mv edition-temp edition-browsers ) )",
@@ -431,7 +432,7 @@
     "our:release": "npm run our:release:prepare && npm run our:release:check-changelog && npm run our:release:check-dirty && npm run our:release:tag && npm run our:release:push",
     "our:release:check-changelog": "cat ./HISTORY.md | grep \"v$npm_package_version\" || (printf '%s\n' \"add a changelog entry for v$npm_package_version\" && exit -1)",
     "our:release:check-dirty": "git diff --exit-code",
-    "our:release:prepare": "npm run our:clean && npm run our:compile && npm run our:test && npm run our:meta",
+    "our:release:prepare": "npm run our:clean && npm run our:compile && npm run my:test && npm run our:meta",
     "our:release:push": "git push origin && git push origin --tags",
     "our:release:tag": "export MESSAGE=$(cat ./HISTORY.md | sed -n \"/## v$npm_package_version/,/##/p\" | sed 's/## //' | awk 'NR>1{print buf}{buf = $0}') && test \"$MESSAGE\" || (printf '%s\n' 'proper changelog entry not found' && exit -1) && git tag \"v$npm_package_version\" -am \"$MESSAGE\"",
     "our:setup": "npm run our:setup:install",
