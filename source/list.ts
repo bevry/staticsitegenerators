@@ -167,6 +167,7 @@ const rawList: RawEntry[] = [
 		language: 'Perl',
 		description: 'static html page generation in perl',
 		is: 'static site generator',
+		testWebsite: false,
 	},
 	{
 		name: 'Blode',
@@ -463,9 +464,9 @@ const rawList: RawEntry[] = [
 	{
 		name: 'DocKnot',
 		github: 'rra/docknot',
-		website: 'https://www.eyrie.org/~eagle/software/docknot/',
 		description:
 			'Static web site generator with special support for managing software releases. It can generate distribution tarballs and software package documentation from a YAML metadata file and templates. The goal is to generate both web pages and distributed documentation files from the same source, using templates for consistency across multiple packages',
+		testWebsite: false,
 	},
 	{
 		name: 'DocPad',
@@ -693,6 +694,7 @@ const rawList: RawEntry[] = [
 		description:
 			'Host your static websites on GitLab.com for free, or on your own GitLab Enterprise Edition instance.',
 		is: 'static site host',
+		testWebsite: false,
 	},
 	{
 		name: 'Glyph',
@@ -1547,6 +1549,7 @@ const rawList: RawEntry[] = [
 			'PHPetite (/p/h/pəˈtēt/) is a single file, static blog generated from PHP',
 		created_at: '2021-02-05T17:43:04Z',
 		is: 'static site generator',
+		testWebsite: false,
 	},
 	{
 		name: 'PieCrust',
