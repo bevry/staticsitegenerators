@@ -45,15 +45,17 @@ const retries = 3
 
 /**
  * Convert milliseconds into human seconds
- * @param milliseconds
+ * @param milliseconds The number of milliseconds to convert
+ * @returns The human readable seconds string
  */
 function toHumanSeconds(milliseconds: number) {
-	return `${Number(milliseconds / 1000).toFixed(1)} seconds`
+	return `${(milliseconds / 1000).toFixed(1)} seconds`
 }
 
 /**
  * Convert a milliseconds delta into human time
- * @param milliseconds
+ * @param milliseconds The number of milliseconds of the delta
+ * @returns The human readable time string
  */
 function toDeltaTime(milliseconds: number) {
 	return new Date(Date.now() + milliseconds).toLocaleTimeString()
@@ -87,15 +89,17 @@ export function halt(milliseconds: number) {
 
 /**
  * Output log segments with consistent separator
- * @param segments
+ * @param segments The log segments to join
+ * @returns The joined log segments string
  */
 function joinLogSegments(...segments: string[]) {
-	return segments.filter((i) => String(i).length !== 0).join(' | ')
+	return segments.filter((i) => i.length !== 0).join(' | ')
 }
 
 /**
  * Deduplicate values, preserving order of first appearance
- * @param values
+ * @param values The values to deduplicate
+ * @returns The deduplicated values
  */
 function dedupe<T>(values: T[]): T[] {
 	return [...new Set(values)]
@@ -103,7 +107,8 @@ function dedupe<T>(values: T[]): T[] {
 
 /**
  * Calculate milliseconds from this Date
- * @param from
+ * @param from The Date or timestamp to calculate the delta from
+ * @returns The number of milliseconds since the given date
  */
 function millisecondsDelta(from: Date | number) {
 	if (from instanceof Date) {
@@ -114,7 +119,8 @@ function millisecondsDelta(from: Date | number) {
 
 /**
  * Collect the `code` properties from an error, its `cause` chain, and any AggregateError members
- * @param error
+ * @param error The error to collect the codes from
+ * @returns The collected error codes
  */
 function getErrorCodes(error: unknown): string[] {
 	if (!error || typeof error !== 'object') {
@@ -140,7 +146,8 @@ function getErrorCodes(error: unknown): string[] {
 
 /**
  * Did our overall request deadline fire? (via `AbortSignal.timeout`, covering every fetch phase)
- * @param error
+ * @param error The error to check
+ * @returns Whether the error indicates a request timeout
  */
 function isRequestTimeout(error: unknown): boolean {
 	const name = (error as { name?: string } | null)?.name
@@ -149,7 +156,8 @@ function isRequestTimeout(error: unknown): boolean {
 
 /**
  * Did the connection phase itself fail? (kernel connect timeouts like a dropped SYN or unroutable IPv6, or undici's own connect timeout)
- * @param error
+ * @param error The error to check
+ * @returns Whether the error indicates a connect timeout
  */
 function isRequestConnectTimeout(error: unknown): boolean {
 	return getErrorCodes(error).some(
@@ -165,7 +173,7 @@ function isRequestConnectTimeout(error: unknown): boolean {
  */
 export async function fetcher(url: string, attempt = 1): Promise<Response> {
 	let response: Response | null = null,
-		responseError: unknown | null = null
+		responseError: unknown = null
 	const attemptSegments: string[] = [url, `attempt ${attempt} of ${retries}`]
 	const attemptStart = Date.now()
 	try {
