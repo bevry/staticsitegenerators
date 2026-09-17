@@ -24,8 +24,8 @@ const oneSecond = 1000
 const thirtySeconds = oneSecond * 30
 const oneMinute = oneSecond * 60
 
-/** This should be adapted based on what we learn on what a platform supports before it hits 429 issues. */
-const requestConcurrency = 40
+/** This should be adapted based on what we learn on what a platform supports before it hits issues. */
+const requestConcurrency = 30
 
 /**
  * How long until a timeout of a request occurs?
