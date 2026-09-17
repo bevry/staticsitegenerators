@@ -84,7 +84,18 @@ function joinLogSegments(...segments: string[]) {
 	return segments.filter((i) => String(i).length !== 0).join(' | ')
 }
 
-/** Calculate milliseconds from this Date */
+/**
+ * Deduplicate values, preserving order of first appearance
+ * @param values
+ */
+function dedupe<T>(values: T[]): T[] {
+	return [...new Set(values)]
+}
+
+/**
+ * Calculate milliseconds from this Date
+ * @param from
+ */
 function millisecondsDelta(from: Date | number) {
 	if (from instanceof Date) {
 		from = from.getTime()
@@ -93,15 +104,57 @@ function millisecondsDelta(from: Date | number) {
 }
 
 /**
+ * Collect the `code` properties from an error, its `cause` chain, and any AggregateError members
+ * @param error
+ */
+function getErrorCodes(error: unknown): string[] {
+	if (!error || typeof error !== 'object') {
+		return []
+	}
+	const codes: string[] = []
+	const code = (error as { code?: unknown }).code
+	if (typeof code === 'string') {
+		codes.push(code)
+	}
+	const cause = (error as { cause?: unknown }).cause
+	if (cause) {
+		codes.push(...getErrorCodes(cause))
+	}
+	const errors = (error as { errors?: unknown }).errors
+	if (Array.isArray(errors)) {
+		for (const inner of errors) {
+			codes.push(...getErrorCodes(inner))
+		}
+	}
+	return codes
+}
+
+/**
+ * Did our overall request deadline fire? (via `AbortSignal.timeout`, covering every fetch phase)
+ * @param error
+ */
+function isRequestTimeout(error: unknown): boolean {
+	const name = (error as { name?: string } | null)?.name
+	return name === 'TimeoutError' || name === 'AbortError'
+}
+
+/**
+ * Did the connection phase itself fail? (kernel connect timeouts like a dropped SYN or unroutable IPv6, or undici's own connect timeout)
+ * @param error
+ */
+function isRequestConnectTimeout(error: unknown): boolean {
+	return getErrorCodes(error).some(
+		(code) => code === 'ETIMEDOUT' || code === 'UND_ERR_CONNECT_TIMEOUT',
+	)
+}
+
+/**
  * Fetch a URL handling retries for timeouts, 429 too many requests, rate limits.
  * @param url The URL to fetch
  * @param attempt The attempt to start one, must be less than {@link retries}
  * @returns A promise that resolves to the fetch {@link Response}
  */
-export async function fetcher(
-	url: string,
-	attempt: number = 1,
-): Promise<Response> {
+export async function fetcher(url: string, attempt = 1): Promise<Response> {
 	let response: Response | null = null,
 		responseError: unknown | null = null
 	const attemptSegments: string[] = [url, `attempt ${attempt} of ${retries}`]
@@ -124,12 +177,11 @@ export async function fetcher(
 			return response // success case, return
 		}
 	} catch (error) {
-		responseError = error as Error
+		responseError = error
 	}
 	const attemptDelta = millisecondsDelta(attemptStart)
 	const responseStatus = response?.status
-	const responseCode =
-		(responseError as { cause?: { code?: string } }).cause?.code || ''
+	const responseCode = dedupe(getErrorCodes(responseError)).join(', ')
 	attemptSegments.push(
 		`duration ${toHumanSeconds(attemptDelta)}`,
 		responseStatus ? `status ${responseStatus}` : '',
@@ -138,8 +190,14 @@ export async function fetcher(
 	if (responseStatus === 429) {
 		attemptSegments.push('too many requests')
 	}
-	if (responseCode === 'ETIMEDOUT') {
+	if (isRequestTimeout(responseError)) {
+		// our overall deadline fired, so it genuinely took this long
 		attemptSegments.push(`timed out after ${toHumanSeconds(requestTimeout)}`)
+	} else if (isRequestConnectTimeout(responseError)) {
+		// the connection phase failed well before our deadline, hence the measured duration
+		attemptSegments.push(
+			`connect timed out after ${toHumanSeconds(attemptDelta)}`,
+		)
 	}
 	attemptSegments.push(responseError ? `error: ${String(responseError)}` : '')
 	if (attempt < retries) {
@@ -150,14 +208,12 @@ export async function fetcher(
 		console.warn(joinLogSegments(...attemptSegments))
 		await halt(attemptRetryDelay)
 		return await fetcher(url, attempt + 1)
+	} else if (responseError) {
+		return Promise.reject(
+			new Error(joinLogSegments(...attemptSegments), responseError),
+		)
 	} else {
-		if (responseError) {
-			return Promise.reject(
-				new Error(joinLogSegments(...attemptSegments), responseError),
-			)
-		} else {
-			return Promise.reject(new Error(joinLogSegments(...attemptSegments)))
-		}
+		return Promise.reject(new Error(joinLogSegments(...attemptSegments)))
 	}
 }
 
