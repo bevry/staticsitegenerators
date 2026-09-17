@@ -2,6 +2,11 @@
 
 [See the git commit history for changes relating to the listing](https://github.com/bevry/staticsitegenerators/commits/master)
 
+## v4.1.0 2026 September 17
+
+- Improved logging, concurrency, retry/attempt handling, and error handling
+- Thank you to the sponsors: [Andrew Nesbitt](https://nesbitt.io), [Poonacha Medappa](https://poonachamedappa.com), [Roboflow](https://roboflow.com)
+
 ## v4.0.2 2026 September 2
 
 - Fixed published package missing `raw.json` and `hydrated.json`

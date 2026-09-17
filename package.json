@@ -1,7 +1,7 @@
 {
   "title": "Static Site Generators Listing",
   "name": "staticsitegenerators",
-  "version": "4.0.2",
+  "version": "4.1.0",
   "license": "Unlicense",
   "description": "A comprehensive, partially automatically generated comparison of static site generators with some minimal meta data about them",
   "homepage": "https://github.com/bevry/staticsitegenerators",
@@ -398,7 +398,7 @@
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
   "devDependencies": {
-    "@bevry/github-api": "^11.4.0",
+    "@bevry/github-api": "^11.4.1",
     "@types/node": "^24.2.0",
     "arrangekeys": "^6.7.0",
     "assert-helpers": "^11.12.0",
