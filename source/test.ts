@@ -20,42 +20,38 @@ const rawPath = join(root, 'raw.json')
 const rawSourcePath = join(root, 'source', 'list.ts')
 const hydratedPath = join(root, 'hydrated.json')
 
-const fetchOptions: unknown = {
-	// a `timeout` property here would do nothing, it is a node-fetch option that
-	// the built-in fetch ignores, see `requestTimeout` for what replaced it
-	redirect: 'error',
-}
-
 const oneSecond = 1000
-const thirySeconds = oneSecond * 30
+const thirtySeconds = oneSecond * 30
 const oneMinute = oneSecond * 60
 
 /** This should be adapted based on what we learn on what a platform supports before it hits 429 issues. */
 const requestConcurrency = 40
 
 /**
- * How long until a 429 is tried again.
- * 429 requests are us requesting too many things at once, which may vary based on the platform.
- * They will be retried indefinitely until a non-429 status is returned.
- */
-const fetcherRetryDelay = oneMinute
-const fetcherRetryDelayHuman = 'one minute'
-
-/**
  * How long until a timeout of a request occurs?
  * Without this a host that accepts the connection this then stalls the suite concurrency, as the built-in fetch has no overall deadline of its own.
  */
-const requestTimeout = thirySeconds
+const requestTimeout = thirtySeconds
 
 /**
  * How long to wait before the first retry of a failed request (timeout or non-429 failure status).
  * For each retry, it is doubled.
  * This should be twice the timeout, because if it struggled to respond in time of the timeout, it is unlikely it will respond in time to another request.
  */
-const retryDelay = requestTimeout * 2
+const requestRetryDelay = requestTimeout * 2
 
-/** How many times to retry a failured URL before failing tit */
+/** How many times to retry a failed URL before failing tit */
 const retries = 3
+
+/** Convert milliseconds into human seconds */
+function toHumanSeconds(milliseconds: number) {
+	return `${Number(milliseconds / 1000).toFixed(1)} seconds`
+}
+
+/** Convert a milliseconds delta into human time */
+function toDeltaTime(milliseconds: number) {
+	return new Date(Date.now() + milliseconds).toLocaleTimeString()
+}
 
 /**
  * Log a message with the specified log level. Debug level messages are filtered out.
@@ -83,89 +79,86 @@ export function halt(milliseconds: number) {
 	})
 }
 
-/**
- * Fetch a URL with automatic retry on 429 (rate limit) responses.
- * @param url The URL to fetch
- * @param init The fetch options and configuration object for the request
- * @returns A promise that resolves to the fetch Response
- */
-export async function fetcher(url: string, init: unknown): Promise<Response> {
-	try {
-		const response = await fetch(url, {
-			...(init as object),
-			// a fresh signal for each attempt, as a fired one cannot be reused
-			signal: AbortSignal.timeout(requestTimeout),
-		})
-		if (response.status === 429) {
-			// wait a minute
-			console.warn(
-				`${url} returned 429, too many requests, trying again in ${fetcherRetryDelayHuman}`,
-			)
-			await halt(fetcherRetryDelay)
-			return await fetcher(url, init)
-		}
-		return response
-	} catch (error) {
-		// GitHub will be hitting rate limits, which we must wait for.
-		// If it is due to a website bot protection, then add `testWebsite: false` to its listing.
-		console.error(`Error fetching ${url}:`, error)
-		return Promise.reject(error)
+/** Output log segments with consistent separator */
+function joinLogSegments(...segments: string[]) {
+	return segments.filter((i) => String(i).length !== 0).join(' | ')
+}
+
+/** Calculate milliseconds from this Date */
+function millisecondsDelta(from: Date | number) {
+	if (from instanceof Date) {
+		from = from.getTime()
 	}
+	return Date.now() - from
 }
 
 /**
- * Check if a URL is accessible by making a HEAD request through a status checking service.
- * Transient outages are common across the many third-party sites in the listing, so a
- * failure is retried {@link retries} times, waiting 2, 4, then 8 seconds. Rate limiting
- * is not handled here, {@link fetcher} deals with that.
- * @param url The URL to check for accessibility
- * @returns A promise that resolves if the URL is accessible, rejects if not
+ * Fetch a URL handling retries for timeouts, 429 too many requests, rate limits.
+ * @param url The URL to fetch
+ * @param attempt The attempt to start one, must be less than {@link retries}
+ * @returns A promise that resolves to the fetch {@link Response}
  */
-async function checkURL(url: string) {
-	let lastError: unknown = null
-	let lastStatus: number | null = null
-	// this is a for loop, unlike fetcher there is no recursion here
-	for (let attempt = 0; attempt <= retries; attempt++) {
-		const started = Date.now()
-		try {
-			// use a response that caches heavily <-- no longer exists and I cannot find a backup
-			// const u = new URL('https://status.bevry.workers.dev')
-			// u.searchParams.set('url', url)
-			// const res = await fetcher(u.toString(), fetchOptions)
-			const res = await fetcher(url, fetchOptions)
-			if (res.ok) return // success case, return
-			// request was succesful with failure status
-			lastError = null
-			lastStatus = res.status
-		} catch (err) {
-			// request was unsuccessful, no failure status
-			lastError = err
-			lastStatus = null
+export async function fetcher(
+	url: string,
+	attempt: number = 1,
+): Promise<Response> {
+	let response: Response | null = null,
+		responseError: unknown | null = null
+	const attemptSegments: string[] = [url, `attempt ${attempt} of ${retries}`]
+	const attemptStart = Date.now()
+	try {
+		response = await fetch(url, {
+			// `timeout` is for node fetch, that native fetch does not use
+			// `signal` is the native fetch implementation, a fresh signal for each attempt, as a fired one cannot be reused
+			signal: AbortSignal.timeout(requestTimeout),
+		})
+		if (response?.ok) {
+			if (attempt > 1) {
+				const attemptDelta = millisecondsDelta(attemptStart)
+				attemptSegments.push(
+					`duration ${toHumanSeconds(attemptDelta)}`,
+					'successful',
+				)
+				console.info(joinLogSegments(...attemptSegments))
+			}
+			return response // success case, return
 		}
-		// inform the user of how long it took, and what our plan is
-		const seconds = ((Date.now() - started) / 1000).toFixed(1)
-		const reason = lastError ? String(lastError) : `status ${lastStatus}`
-		if (attempt === retries) {
-			// we've already done all the retries
-			console.warn(
-				`checkURL: ${url} failed after ${seconds}s (${reason}), giving up after ${retries} retries`,
+	} catch (error) {
+		responseError = error as Error
+	}
+	const attemptDelta = millisecondsDelta(attemptStart)
+	const responseStatus = response?.status
+	const responseCode =
+		(responseError as { cause?: { code?: string } }).cause?.code || ''
+	attemptSegments.push(
+		`duration ${toHumanSeconds(attemptDelta)}`,
+		responseStatus ? `status ${responseStatus}` : '',
+		responseCode ? `code ${responseCode}` : '',
+	)
+	if (responseStatus === 429) {
+		attemptSegments.push('too many requests')
+	}
+	if (responseCode === 'ETIMEDOUT') {
+		attemptSegments.push(`timed out after ${toHumanSeconds(requestTimeout)}`)
+	}
+	attemptSegments.push(responseError ? `error: ${String(responseError)}` : '')
+	if (attempt < retries) {
+		const attemptRetryDelay = requestRetryDelay * 2 * attempt
+		attemptSegments.push(
+			`retrying in ${toHumanSeconds(attemptRetryDelay)} at ${toDeltaTime(attemptRetryDelay)}`,
+		)
+		console.warn(joinLogSegments(...attemptSegments))
+		await halt(attemptRetryDelay)
+		return await fetcher(url, attempt + 1)
+	} else {
+		if (responseError) {
+			return Promise.reject(
+				new Error(joinLogSegments(...attemptSegments), responseError),
 			)
 		} else {
-			// retry
-			const delay = retryDelay * 2 ** attempt
-			console.warn(
-				`checkURL: ${url} failed after ${seconds}s (${reason}), retrying in ${delay / 1000} seconds (retry ${attempt + 1} of ${retries})`,
-			)
-			await halt(delay)
+			return Promise.reject(new Error(joinLogSegments(...attemptSegments)))
 		}
 	}
-	// if it was successful, the earlier `return` would have happened, so this is a failure case
-	if (lastError) return Promise.reject(lastError)
-	equal(
-		lastStatus,
-		200,
-		`checkURL: response http status code should be 200 success on ${url}`,
-	)
 }
 
 kava.suite('static site generators list', function (suite, test) {
@@ -194,7 +187,11 @@ kava.suite('static site generators list', function (suite, test) {
 				equal(
 					validSPDX(license),
 					true,
-					`${name}: license of ${license} is not a valid SPDX identifier: http://spdx.org/licenses/`,
+					joinLogSegments(
+						name,
+						`license ${license}`,
+						`not a valid SPDX identifier from http://spdx.org/licenses/`,
+					),
 				)
 			}
 		})
@@ -202,31 +199,35 @@ kava.suite('static site generators list', function (suite, test) {
 
 	// This suite requires every third-party repository and website in the listing
 	// to be reachable, on every os in the matrix, and because `publish` declares
-	// `needs: test`, an outage anywhere also blocks the deploy. Three runs in a
-	// row failed on a different site that was not actually down: nestacms.com,
-	// hexo.io, psyke.org. `checkURL` now retries to absorb that.
+	// `needs: test`, an outage anywhere also blocks the deploy. This is intentional.
 	suite('uris are valid / still exist', function (suite, test) {
 		// @ts-expect-error kava isn't typed
 		this.setConfig({ concurrency: requestConcurrency }) // eslint-disable-line
 		rawList.forEach(function ({ name, github, website, testWebsite }) {
 			if (github) {
 				const githubUrl = `https://github.com/${github}`
-				test(`${name}: http get github: ${githubUrl}`, function (done) {
-					checkURL(githubUrl)
-						.then(() => {
-							done()
-						})
-						.catch(done)
-				})
+				test(
+					joinLogSegments(name, 'http get github', githubUrl),
+					function (done) {
+						fetcher(githubUrl)
+							.then(() => {
+								done()
+							})
+							.catch(done)
+					},
+				)
 			}
 			if (website && testWebsite !== false) {
-				test(`${name}: http get website: ${website}`, function (done) {
-					checkURL(website)
-						.then(() => {
-							done()
-						})
-						.catch(done)
-				})
+				test(
+					joinLogSegments(name, 'http get website', website),
+					function (done) {
+						fetcher(website)
+							.then(() => {
+								done()
+							})
+							.catch(done)
+					},
+				)
 			}
 		})
 	})
