@@ -2340,6 +2340,11 @@ const rawList: RawEntry[] = [
 		github: 'creationix/wheat',
 	},
 	{
+		name: 'Wiki Pilot',
+		github: 'guymoyal/wikipilot',
+		is: 'static site generator',
+	},
+	{
 		name: 'Wikismith',
 		github: 'wikismith/wikismith',
 		license: 'MIT',
