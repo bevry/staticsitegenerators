@@ -1953,7 +1953,7 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Sourcey',
 		github: 'sourcey/sourcey',
-		website: 'https://sourcey.com/oss',
+		website: 'https://sourcey.com/docs',
 		is: 'static site generator',
 		language: 'TypeScript',
 		license: 'AGPL-3.0-only',
