@@ -1953,12 +1953,12 @@ const rawList: RawEntry[] = [
 	{
 		name: 'Sourcey',
 		github: 'sourcey/sourcey',
-		website: 'https://sourcey.com',
+		website: 'https://sourcey.com/oss',
 		is: 'static site generator',
 		language: 'TypeScript',
-		license: 'AGPL-3.0',
+		license: 'AGPL-3.0-only',
 		description:
-			'Open source documentation platform for OpenAPI specs and markdown.',
+			'Static documentation generator for OpenAPI, MCP, Doxygen, godoc, rustdoc, and Markdown.',
 	},
 	{
 		name: 'Speechhub',
