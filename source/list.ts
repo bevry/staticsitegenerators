@@ -1453,6 +1453,12 @@ const rawList: RawEntry[] = [
 		github: 'octopress/octopress',
 	},
 	{
+		name: 'OMEGA',
+		github: 'Omega-JS-Stack/omega',
+		website: 'https://omegajs.dev',
+		is: 'static site generator',
+	},
+	{
 		name: 'onessg',
 		github: 'RyanZim/onessg',
 		is: 'static site generator',
