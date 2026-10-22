@@ -1943,6 +1943,16 @@ const rawList: RawEntry[] = [
 		github: 'haldean/sortastatic',
 	},
 	{
+		name: 'Sourcey',
+		github: 'sourcey/sourcey',
+		website: 'https://sourcey.com/docs',
+		is: 'static site generator',
+		language: 'TypeScript',
+		license: 'AGPL-3.0-only',
+		description:
+			'Static documentation generator for OpenAPI, MCP, Doxygen, godoc, rustdoc, and Markdown.',
+	},
+	{
 		name: 'Speechhub',
 		github: 'pythonmg/speechhub',
 	},
