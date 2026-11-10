@@ -643,6 +643,11 @@ const rawList: RawEntry[] = [
 		github: 'shuhaowu/Funnel',
 	},
 	{
+		name: 'Fussel',
+		github: 'cbenning/fussel',
+		is: 'static site generator',
+	},
+	{
 		name: 'Garoozis',
 		github: 'aguerrera/Garoozis',
 		language: 'F#',
