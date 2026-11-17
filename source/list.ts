@@ -1319,6 +1319,14 @@ const rawList: RawEntry[] = [
 		github: 'mkdocs/mkdocs',
 	},
 	{
+		name: 'MkDocs NG',
+		github: 'mkdocs-ng/mkdocs',
+		website: 'https://mkdocs-ng.org',
+		description:
+			'Maintained fork of MkDocs 1.x that keeps existing plugins and themes working.',
+		is: 'static site generator',
+	},
+	{
 		name: 'mksite',
 		github: 'clehner/mksite',
 	},
