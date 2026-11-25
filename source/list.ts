@@ -912,6 +912,12 @@ const rawList: RawEntry[] = [
 		website: 'http://thoughtbot.github.io/high_voltage/',
 	},
 	{
+		name: 'HotDog CMS',
+		github: 'Coffey-Labs/hotdog-cms',
+		is: 'static site generator',
+		extensible: true,
+	},
+	{
 		name: 'htmd',
 		github: 'Siecje/htmd',
 		created_at: '2015-01-31',
